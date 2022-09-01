@@ -1,40 +1,52 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, SafeAreaView, View, Platform, Image } from 'react-native';
-import { Colors } from '../app-vuelos/src/theme/Colors'
-import LottieView from 'lottie-react-native';
+import React from "react";
+import { StatusBar } from "expo-status-bar";
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  TextInput,
+  View,
+  Image
+} from "react-native";
+import { Colors } from "../app-vuelos/src/theme/Colors";
+import LottieView from "lottie-react-native";
+import MyInput from "./src/components/MyInput";
 
 export default function App() {
-
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{color:'#5C6EF8', fontWeight:'bold', fontSize:20, marginTop: 60}}>Sign Up</Text>
-      
-      <Text >Firts Name:</Text>
+      <Text
+        style={{
+          color: "#5C6EF8",
+          fontWeight: "bold",
+          fontSize: 20,
+          marginTop: 60
+        }}
+      >
+        Sign Up
+      </Text>
+
+      <Text>Firts Name:</Text>
       <TextInput
-      placeholder='Ingrese tu nombre'
-      keyboardType='default'
-      style={styles.input}
+        placeholder="Ingrese tu nombre"
+        keyboardType="default"
+        style={styles.input}
       />
-            <Text >Email:</Text>
-      <TextInput
-      placeholder='Ingrese tu nombre'
-      keyboardType='email-address'
-      style={styles.input}
-      ke
+      <Text>Email:</Text>
+      <MyInput label={"Ingrese tu Email"} keyboardType="email-address" />
+      <Text>Password:</Text>
+
+      <MyInput 
+      label={'Ingresa tu Contraseña'}
+      secureTextEntry
       />
-            <Text >Password:</Text>
-      <TextInput
-      placeholder='Ingrese tu nombre'
-      keyboardType='default'
-      style={styles.input}
-      secureTextEntry={true}
-      />
-      <View>
-        <Image
-        source={require('./src/assets/g1.png')}
-        style={{width:50, height:50}}
-        />
+      <Text>Use 8 or more characters with a mix of letters, numbers, and symbols</Text>
+        <View>
+          <Text>I agree to the Terms and Privacy Policy</Text>
+          <Text>Subscribe for select prouct updates</Text>
+        </View>
+      {/* <View>
+
       <LottieView
       loop
       autoPlay
@@ -47,11 +59,16 @@ export default function App() {
       }}
       source={require('./assets/login.json')}
     />
+      </View> */}
+
+      <View style={{width:'100%', height:50, backgroundColor:'#B6B7BA', borderRadius:8, alignItems:'center', flexDirection:'row'}}>
+      <Image
+        source={require('./src/assets/g1.png')}
+        style={{width:50, height:50}}
+        />
       </View>
-    
-      
-      
-      
+      <Text>Sign Up with Google</Text>
+
       <StatusBar style="auto" />
     </SafeAreaView>
   );
@@ -60,18 +77,17 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignSelf:'center',
-    width:'90%',
-    backgroundColor: Colors.primary,
+    alignSelf: "center",
+    width: "90%"
+    //backgroundColor: Colors.primary,
   },
-  input:{
-    paddingLeft:8,
-    alignSelf:'center',
-    width:'100%',
+  input: {
+    paddingLeft: 8,
+    alignSelf: "center",
+    width: "100%",
     height: 50,
     borderWidth: 1,
     borderColor: Colors.black,
-    borderRadius:8,
-  },
-
+    borderRadius: 8
+  }
 });

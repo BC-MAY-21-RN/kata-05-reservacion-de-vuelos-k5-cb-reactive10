@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Checkbox from 'expo-checkbox';
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -8,52 +9,60 @@ import {
   View,
   Image,
   TouchableOpacity,
-  Button
+  Button,
 } from "react-native";
-import CheckBox from "@react-native-community/checkbox";
-//import { CheckBox } from 'react-native';
 import { Colors } from "../app-vuelos/src/theme/Colors";
 import LottieView from "lottie-react-native";
 import MyInput from "./src/components/MyInput";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function App() {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const [isChecked, setChecked] = useState(false);
+
   return (
-    <SafeAreaView style={styles.container}>
-      <Text
-        style={{
-          color: "#5C6EF8",
-          fontWeight: "bold",
-          fontSize: 20,
-          marginTop: 60
-        }}
-      >
-        Sign Up
-      </Text>
+    <KeyboardAwareScrollView>
+      <SafeAreaView style={styles.container}>
+        <Text
+          style={{
+            color: "#5C6EF8",
+            fontWeight: "bold",
+            fontSize: 25,
+            marginTop: 60,
+            marginBottom: 13,
+          }}
+        >
+          Sign Up
+        </Text>
 
-      <Text>Firts Name:</Text>
-      <TextInput
-        placeholder="Ingrese tu nombre"
-        keyboardType="default"
-        style={styles.input}
-      />
-      <Text>Email:</Text>
-      <MyInput label={"Ingrese tu Email"} keyboardType="email-address" />
-      <Text>Password:</Text>
+        <Text style={styles.textEmailP}>Firts Name:</Text>
+        <MyInput label={"Ingrese su nombre"} keyboardType="default" />
+        <Text style={styles.textEmailP}>Email *</Text>
+        <MyInput label={"Ingrese tu Email"} keyboardType="email-address" />
+        <Text style={styles.textEmailP}>Password *</Text>
 
-      <MyInput label={"Ingresa tu Contraseña"} secureTextEntry />
-      <Text>
-        Use 8 or more characters with a mix of letters, numbers, and symbols
-      </Text>
-      <View>
-        <Text>I agree to the Terms and Privacy Policy</Text>
-        <Text>Subscribe for select prouct updates</Text>
+        <MyInput label={"Ingresa tu Contraseña"} secureTextEntry />
+        <Text style={{ marginTop: 4, marginBottom: 15, color: 'grey' }}>
+          Use 8 or more characters with a mix of letters, numbers, and symbols
+        </Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Checkbox
+            style={styles.checkbox}
+            value={isChecked}
+            onValueChange={setChecked}
+            color={isChecked ? '#4630EB' : undefined}
+          />
+          <Text style={styles.textCheckBox}>I agree to the Terms and Privacy Policy</Text>
+        </View>
 
-        {/* <CheckBox
-          disabled={false}
-          value={toggleCheckBox}
-          onValueChange={(newValue) => setToggleCheckBox(newValue)}
-        /> */}
+        <View style={{ flexDirection: 'row' }}>
+          <Checkbox
+            style={styles.checkbox}
+            value={isChecked}
+            onValueChange={setChecked}
+            color={isChecked ? '#4630EB' : undefined}
+          />
+          <Text style={styles.textCheckBox}>Subscribe for select prouct updates</Text>
       </View>
       {/* <View>
 
@@ -119,14 +128,8 @@ export default function App() {
         </View>
       </TouchableOpacity>
 
-       <TouchableOpacity  style={{ marginTop:10, borderWidth: 1,
-    borderColor: "thistle", height:40}}>
-
-
-       </TouchableOpacity>
-      
-
     </SafeAreaView>
+    </KeyboardAwareScrollView >
   );
 }
 
@@ -145,5 +148,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.black,
     borderRadius: 8
+  },
+  textEmailP: {
+    fontSize: 17,
+    marginTop: 25,
+    marginBottom: 5,
+  },
+
+  textCheckBox: {
+    fontSize: 17,
+    color: 'grey',
+    marginBottom: 13,
+    paddingHorizontal: 6,
   }
 });

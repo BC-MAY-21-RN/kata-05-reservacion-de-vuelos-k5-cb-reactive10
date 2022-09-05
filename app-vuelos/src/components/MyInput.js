@@ -21,8 +21,9 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     width:'100%',
     height: 50,
-    borderWidth: 1,
+    borderWidth: 1.5,
     borderColor: Colors.black,
-    borderRadius:8,
+    borderRadius:5,
+    //marginTop: 20,
   },
 })

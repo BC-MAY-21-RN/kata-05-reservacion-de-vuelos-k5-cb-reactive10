@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Checkbox from 'expo-checkbox';
 import { StatusBar } from "expo-status-bar";
+import {  Ionicons} from "@expo/vector-icons";
+
 import {
   StyleSheet,
   Text,
@@ -19,6 +21,17 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 export default function App() {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [isChecked, setChecked] = useState(false);
+  const [input, setInput] = useState({
+    name:"",
+    email:"",
+    password:""
+  })
+  const [showPassword, setshowPassword] = useState(false)
+
+  console.log(input.name)
+  console.log(input.email)
+  console.log(input.password)
+
 
   return (
     <KeyboardAwareScrollView>
@@ -36,12 +49,27 @@ export default function App() {
         </Text>
 
         <Text style={styles.textEmailP}>Firts Name:</Text>
-        <MyInput label={"Ingrese su nombre"} keyboardType="default" />
+        <MyInput label={"Ingrese su nombre"} keyboardType="default"
+         value ={input.name}
+         onChangeText={(e)=>setInput({...input,name: (e)})} 
+        />
+
         <Text style={styles.textEmailP}>Email *</Text>
-        <MyInput label={"Ingrese tu Email"} keyboardType="email-address" />
+        <MyInput label={"Ingrese tu Email"} keyboardType="email-address" 
+         value={input.email}
+         onChangeText={(e)=>setInput({...input,email: (e)})} />
         <Text style={styles.textEmailP}>Password *</Text>
 
-        <MyInput label={"Ingresa tu Contraseña"} secureTextEntry />
+        <MyInput label={"Ingresa tu Contraseña"} secureTextEntry={!showPassword}
+        value={input.password}
+        onChangeText={(e)=>setInput({...input,password: (e)})}
+            icons={"eye"}
+            showPassword={showPassword}
+            setshowPassword={setshowPassword}
+        />
+        
+
+
         <Text style={{ marginTop: 4, marginBottom: 15, color: 'grey' }}>
           Use 8 or more characters with a mix of letters, numbers, and symbols
         </Text>

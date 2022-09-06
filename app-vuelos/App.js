@@ -16,11 +16,14 @@ import {
 import { Colors } from "../app-vuelos/src/theme/Colors";
 import LottieView from "lottie-react-native";
 import MyInput from "./src/components/MyInput";
+import MyButton from "./src/components/MyButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function App() {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [isChecked, setChecked] = useState(false);
+  const [isCheckedAux, setCheckedAux] = useState(false);
+
   const [input, setInput] = useState({
     name:"",
     email:"",
@@ -28,9 +31,6 @@ export default function App() {
   })
   const [showPassword, setshowPassword] = useState(false)
 
-  console.log(input.name)
-  console.log(input.email)
-  console.log(input.password)
 
 
   return (
@@ -70,7 +70,7 @@ export default function App() {
         
 
 
-        <Text style={{ marginTop: 4, marginBottom: 15, color: 'grey' }}>
+        <Text style={{ marginTop: 4, marginBottom: 15, color: 'grey',paddingBottom:20 }}>
           Use 8 or more characters with a mix of letters, numbers, and symbols
         </Text>
         <View style={{ flexDirection: 'row' }}>
@@ -86,9 +86,9 @@ export default function App() {
         <View style={{ flexDirection: 'row' }}>
           <Checkbox
             style={styles.checkbox}
-            value={isChecked}
-            onValueChange={setChecked}
-            color={isChecked ? '#4630EB' : undefined}
+            value={isCheckedAux}
+            onValueChange={setCheckedAux}
+            color={isCheckedAux ? '#4630EB' : undefined}
           />
           <Text style={styles.textCheckBox}>Subscribe for select prouct updates</Text>
       </View>
@@ -108,53 +108,25 @@ export default function App() {
     />
       </View> */}
 
-      <TouchableOpacity onPress={() => alert("Press Btn Google")}>
-        <View
-          style={{
-            width: "100%",
-            height: 50,
-            backgroundColor: "#B6B7BA",
-            borderRadius: 8,
-            alignItems: "center",
-            flexDirection: "row",
-            justifyContent: "space-evenly"
-          }}
-        >
-          <View style={{ marginLeft: -20 }}>
-            <Image
-              source={require("./src/assets/g1.png")}
-              style={{ width: 40, height: 40 }}
-            />
-          </View>
-          <Text
-            style={{ color: Colors.white, fontSize: 20, fontWeight: "500" }}
-          >
-            Sign Up with Google
-          </Text>
-        </View>
-      </TouchableOpacity>
-      <StatusBar style="auto" />
+       <MyButton  text={ "Sign Up " } 
+    alertText ={"Press Btn Sing Up"}
+    name={"sing"}
+    />
+        
+        <Text style={{textAlign:"center"}}>
+          or
+        </Text>
+     
+      <MyButton  text={ "Sign Up with Google" } 
+    alertText ={"Press Btn Google"}
+    name={"google"}
+    />
+    
+    <Text style={{textAlign:"center"}}>
+          Already have an count? Long in
+        </Text>
 
-      <TouchableOpacity onPress={() => alert("Press Btn Sing Up")}>
-        <View
-          style={{
-            width: "100%",
-            height: 50,
-            backgroundColor: "#B6B7BA",
-            borderRadius: 8,
-            alignItems: "center",
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-            marginTop: 10
-          }}
-        >
-          <Text
-            style={{ color: Colors.white, fontSize: 20, fontWeight: "500" }}
-          >
-            Sing Up
-          </Text>
-        </View>
-      </TouchableOpacity>
+    <StatusBar style= {"auto"} />
 
     </SafeAreaView>
     </KeyboardAwareScrollView >

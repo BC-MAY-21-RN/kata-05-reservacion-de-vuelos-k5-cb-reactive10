@@ -26,8 +26,16 @@ export const stylesMyInput = StyleSheet.create({
       fontSize: 17,
       marginTop: 25,
       marginBottom: 5
+    },
+    errorMensage:{
+      paddingHorizontal: 8, 
+      marginTop: 23, 
+      color: Colors.red, 
+      fontSize: 16
+    },
+    viewStyle:{
+      flexDirection: 'row',
+      alignItems: 'center'
     }
-  
-  
 
 });

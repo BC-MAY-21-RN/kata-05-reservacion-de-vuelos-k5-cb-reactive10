@@ -14,13 +14,16 @@ const MyInput = ({
   showPassword,
   setshowPassword,
   error,
-  onFocus = () => {}
+  onFocus = () => { }
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   return (
     <View>
-      <Text style={stylesMyInput.textEmailP}>{label}</Text>
-      <View style={stylesMyInput.container }>
+      <View style={stylesMyInput.viewStyle}>
+        <Text style={stylesMyInput.textEmailP}>{label}</Text>
+        <Text style={stylesMyInput.errorMensage}>{error}</Text>
+      </View>
+      <View style={stylesMyInput.container}>
         <TextInput
           placeholder={label}
           keyboardType={keyboardType}
@@ -50,5 +53,6 @@ const MyInput = ({
     </View>
   );
 };
+
 
 export default MyInput;

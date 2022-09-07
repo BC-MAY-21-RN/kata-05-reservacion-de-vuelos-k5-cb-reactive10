@@ -31,26 +31,30 @@ const SignUp = () => {
     let isValid = true;
 
     if (!inputs.email) {
-      handleError("Please input email", "email");
+      handleError("*Please input email", "email");
       isValid = false;
     } else if (!inputs.email.match(/\S+@\S+\.\S+/)) {
-      handleError("Please input a valid email", "email");
+      handleError("*Please input a valid email", "email");
       isValid = false;
     }
 
     if (!inputs.name) {
-      handleError("Please input fullname", "name");
+      handleError("*Please input fullname", "name");
       isValid = false;
     }
 
     if (!inputs.password) {
-      handleError("Please input password", "password");
+      handleError("*Please input password", "password");
       isValid = false;
     } else if (inputs.password.length < 8) {
-      handleError("Min password length of 8", "password");
+      handleError("*Min password length of 8", "password");
       isValid = false;
-    }else if (!inputs.password.match(/\S+@\S+\.\S+/)) {
-      handleError("Please input a valid password", "password");
+    } else if (!inputs.password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)) {
+      handleError("*Please input a valid password", "password");
+      isValid = false;
+    }
+    if (!isChecked) {
+      alert("*Please acept Termns and Privacy policy");
       isValid = false;
     }
 
@@ -116,6 +120,8 @@ const SignUp = () => {
           onFocus={() => handleError(null, "password")}
         />
 
+
+
         <Text style={stylesSignUp.txtPassw}>
           Use 8 or more characters with a mix of letters, numbers, and symbols
         </Text>
@@ -126,6 +132,7 @@ const SignUp = () => {
             onValueChange={setChecked}
             color={isChecked ? Colors.blue : null}
           />
+
           <Text style={stylesSignUp.textCheckBox}>
             I agree to the{" "}
             <Text style={{ textDecorationLine: "underline" }}>Terms</Text> and{" "}

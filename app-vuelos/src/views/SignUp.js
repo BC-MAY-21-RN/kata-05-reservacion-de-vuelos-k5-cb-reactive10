@@ -46,8 +46,11 @@ const SignUp = () => {
     if (!inputs.password) {
       handleError("Please input password", "password");
       isValid = false;
-    } else if (inputs.password.length < 5) {
-      handleError("Min password length of 5", "password");
+    } else if (inputs.password.length < 8) {
+      handleError("Min password length of 8", "password");
+      isValid = false;
+    }else if (!inputs.password.match(/\S+@\S+\.\S+/)) {
+      handleError("Please input a valid password", "password");
       isValid = false;
     }
 

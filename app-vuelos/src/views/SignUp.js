@@ -62,11 +62,11 @@ const SignUp = () => {
       try {
         setLoading(false);
         //navigation.navigate('LoginScreen');
-        alert("GOOOOOOO");
+        alert("GOOOO GOOOOOO!!!!");
       } catch (error) {
         alert("Error", "Something went wrong");
       }
-    }, 3000);
+    }, 1500);
   };
   ////////
 
@@ -119,7 +119,7 @@ const SignUp = () => {
         <View style={{ flexDirection: "row" }}>
           <Checkbox
             style={stylesSignUp.checkbox}
-            //value={isChecked}
+            value={isChecked}
             onValueChange={setChecked}
             color={isChecked ? Colors.blue : null}
           />
@@ -136,7 +136,7 @@ const SignUp = () => {
         <View style={{ flexDirection: "row" }}>
           <Checkbox
             style={stylesSignUp.checkbox}
-            //value={isCheckedAux}
+            value={isCheckedAux}
             onValueChange={setCheckedAux}
             color={isCheckedAux ? Colors.blue : null}
           />

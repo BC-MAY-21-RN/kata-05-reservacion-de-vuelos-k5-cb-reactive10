@@ -40,10 +40,9 @@ const MyInput = ({
             name={showPassword ? "eye" : "eye-off"}
             onPress={() => {
               setshowPassword(!showPassword);
-              //setIsFocused(true);
             }}
             style={styles.icon}
-            color={setIsFocused ? Colors.blue : Colors.red}
+            color={isFocused ? Colors.blue : Colors.grey}
           />
         )}
       </View>

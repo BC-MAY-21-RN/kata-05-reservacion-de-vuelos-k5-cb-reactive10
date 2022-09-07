@@ -1,52 +1,40 @@
-import { StyleSheet, Image, View, TouchableOpacity, Text } from "react-native";
-import React from "react";
+//import system
+import { Image, View, TouchableOpacity, Text } from "react-native";
+import React, { useState } from "react";
+//imports user
 import { Colors } from "../theme/Colors";
+import { stylesMyButton } from "./style/StyleMyButton";
 
 const MyButton = ({ text, alertText, name }) => {
+  const [isPressColor, setIsPressColor] = useState(Colors.grey2);
+  //funcion para cambiar el color
+  const changeColorBtn = () => {
+    let color = Colors.blue;
+    setIsPressColor(color);
+  };
+
   return (
     <>
-      <TouchableOpacity onPress={() => alert(alertText)}>
-        <View style={styles.container}>
-          <Text style={styles.txtBtn}>{text}</Text>
-          {/* {name === "google" && (
-            <View
-              style={{
-                backgroundColor: "red",
-                position: "absolute",
-                marginHorizontal: 500
-              }}
-            >
-              <Image
-                source={require("../assets/g1.png")}
-                style={{ width: 40, height: 40 }}
-              />
-            </View>
-          )} */}
+      <TouchableOpacity
+        onPress={() => alert(alertText)}
+        onPressIn={changeColorBtn}
+      >
+        <View
+          style={[stylesMyButton.container, { backgroundColor: isPressColor }]}
+        >
+          <Text style={stylesMyButton.txtBtn}>{text}</Text>
         </View>
+        {name === "google" && (
+          <View style={stylesMyButton.btnGoogle}>
+            <Image
+              source={require("../assets/g1.png")}
+              style={stylesMyButton.dimensionBtnGoogle}
+            />
+          </View>
+        )}
       </TouchableOpacity>
     </>
   );
 };
 
 export default MyButton;
-
-const styles = StyleSheet.create({
-  container: {
-    width: "95%",
-    height: 50,
-    backgroundColor: "#B6B7BA",
-    borderRadius: 8,
-    alignItems: "center",
-    //flexDirection: "row",
-    justifyContent: "space-evenly",
-    marginRight: "auto",
-    marginLeft: "auto",
-    marginBottom: 15,
-    marginTop: 15
-  },
-  txtBtn: {
-    color: Colors.white,
-    fontSize: 20,
-    fontWeight: "500"
-  }
-});

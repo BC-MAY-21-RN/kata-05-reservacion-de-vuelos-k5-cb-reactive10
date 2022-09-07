@@ -5,5 +5,6 @@ export const Colors = {
   white: "#f8fafc",
   blue: "#4630EB",
   red: "#FF6347",
-  grey: "#808080"
+  grey: "#808080",
+  grey2: "#B6B7BA"
 };

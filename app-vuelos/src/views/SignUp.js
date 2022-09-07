@@ -1,7 +1,7 @@
 //imports system
 import React, { useState } from "react";
 import Checkbox from "expo-checkbox";
-import { Text, SafeAreaView, View } from "react-native";
+import { Text, SafeAreaView, View, Keyboard } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 //imports theme and styles user
@@ -16,17 +16,63 @@ const SignUp = () => {
   //useStates
   const [isChecked, setChecked] = useState(false);
   const [isCheckedAux, setCheckedAux] = useState(false);
-  const [input, setInput] = useState({
+  const [inputs, setInputs] = useState({
     name: "",
     email: "",
     password: ""
   });
   const [showPassword, setshowPassword] = useState(false);
   const [errors, setErrors] = useState({});
+  ////////
+  const [loading, setLoading] = useState(false);
+
+  const validate = () => {
+    Keyboard.dismiss();
+    let isValid = true;
+
+    if (!inputs.email) {
+      handleError("Please input email", "email");
+      isValid = false;
+    } else if (!inputs.email.match(/\S+@\S+\.\S+/)) {
+      handleError("Please input a valid email", "email");
+      isValid = false;
+    }
+
+    if (!inputs.name) {
+      handleError("Please input fullname", "name");
+      isValid = false;
+    }
+
+    if (!inputs.password) {
+      handleError("Please input password", "password");
+      isValid = false;
+    } else if (inputs.password.length < 5) {
+      handleError("Min password length of 5", "password");
+      isValid = false;
+    }
+
+    if (isValid) {
+      register();
+    }
+  };
+
+  const register = () => {
+    setLoading(true);
+    setTimeout(() => {
+      try {
+        setLoading(false);
+        //navigation.navigate('LoginScreen');
+        alert("GOOOOOOO");
+      } catch (error) {
+        alert("Error", "Something went wrong");
+      }
+    }, 3000);
+  };
+  ////////
 
   //functions
   const handleOnchange = (text, input) => {
-    setInput((prevState) => ({ ...prevState, [input]: text }));
+    setInputs((prevState) => ({ ...prevState, [input]: text }));
   };
   const handleError = (error, input) => {
     setErrors((prevState) => ({ ...prevState, [input]: error }));
@@ -39,7 +85,7 @@ const SignUp = () => {
         <MyInput
           label={"Firts Name"}
           keyboardType="default"
-          value={input.name}
+          //value={input.name}
           onChangeText={(text) => handleOnchange(text, "name")}
           //onChangeText={(e) => setInput({ ...input, name: e })}
           error={errors.name}
@@ -48,7 +94,7 @@ const SignUp = () => {
         <MyInput
           label={"Email *"}
           keyboardType="email-address"
-          value={input.email}
+          //value={input.email}
           onChangeText={(text) => handleOnchange(text, "email")}
           //onChangeText={(e) => setInput({ ...input, email: e })}
           error={errors.email}
@@ -57,7 +103,7 @@ const SignUp = () => {
         <MyInput
           label={"Password *"}
           secureTextEntry={!showPassword}
-          value={input.password}
+          //value={input.password}
           onChangeText={(text) => handleOnchange(text, "password")}
           //onChangeText={(e) => setInput({ ...input, password: e })}
           icons={"eye"}
@@ -73,7 +119,7 @@ const SignUp = () => {
         <View style={{ flexDirection: "row" }}>
           <Checkbox
             style={stylesSignUp.checkbox}
-            value={isChecked}
+            //value={isChecked}
             onValueChange={setChecked}
             color={isChecked ? Colors.blue : null}
           />
@@ -90,7 +136,7 @@ const SignUp = () => {
         <View style={{ flexDirection: "row" }}>
           <Checkbox
             style={stylesSignUp.checkbox}
-            value={isCheckedAux}
+            //value={isCheckedAux}
             onValueChange={setCheckedAux}
             color={isCheckedAux ? Colors.blue : null}
           />
@@ -103,6 +149,7 @@ const SignUp = () => {
           text={"Sign Up "}
           alertText={"Press Btn Sing Up"}
           name={"sing"}
+          onPress={validate}
         />
 
         <Text style={[stylesSignUp.textCheckBox, { textAlign: "center" }]}>

@@ -15,6 +15,7 @@ import CheckBox from "@react-native-community/checkbox";
 import { Colors } from "../app-vuelos/src/theme/Colors";
 import LottieView from "lottie-react-native";
 import MyInput from "./src/components/MyInput";
+import LoginScreen from "./src/views/LoginScreen";
 
 export default function App() {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
@@ -125,6 +126,8 @@ export default function App() {
 
        </TouchableOpacity>
       
+
+
 
     </SafeAreaView>
   );

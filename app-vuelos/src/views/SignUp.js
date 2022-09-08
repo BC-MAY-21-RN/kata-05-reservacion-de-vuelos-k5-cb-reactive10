@@ -43,17 +43,17 @@ const SignUp = () => {
       isValid = false;
     }
 
-<<<<<<< HEAD
-    
-=======
->>>>>>> master
     if (!inputs.password) {
       handleError("*Please input password", "password");
       isValid = false;
     } else if (inputs.password.length < 8) {
       handleError("*Min password length of 8", "password");
       isValid = false;
-    } else if (!inputs.password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)) {
+    } else if (
+      !inputs.password.match(
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
+      )
+    ) {
       handleError("*Please input a valid password", "password");
       isValid = false;
     }
@@ -123,8 +123,6 @@ const SignUp = () => {
           error={errors.password}
           onFocus={() => handleError(null, "password")}
         />
-
-
 
         <Text style={stylesSignUp.txtPassw}>
           Use 8 or more characters with a mix of letters, numbers, and symbols

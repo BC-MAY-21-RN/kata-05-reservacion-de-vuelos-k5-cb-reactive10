@@ -12,6 +12,7 @@ import { BlurView } from "expo-blur";
 import LottieView from "lottie-react-native";
 import { StatusBar } from "expo-status-bar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import MyInput from "../components/MyInput";
 
 const uri =
   "https://images.unsplash.com/photo-1527517928481-bcf8d6534de0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGF2aWFjaW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
@@ -45,23 +46,20 @@ export default function LoginScreen() {
               source={require("../../assets/flights.json")}
             />
             <View>
-              <Text style={{ fontSize: 17, fontWeight: "400", color: "white" }}>
-                E-mail
-              </Text>
-              <TextInput
-                onChangeText={(text) => setEmail(text)}
-                style={styles.input}
-                placeholder="email@email.com"
+
+              <MyInput
+                borderColor="#fff"
+                label={'Email'}
+                keyboardType={'email-address'}
               />
+
             </View>
+
             <View>
-              <Text style={{ fontSize: 17, fontWeight: "400", color: "white" }}>
-                Password
-              </Text>
-              <TextInput
-                onChangeText={(text) => setPassword(text)}
-                style={styles.input}
-                placeholder="password"
+              <MyInput
+                borderColor="#fff"
+                label={'Password'}
+                keyboardType={'keyboardType'}
                 secureTextEntry={true}
               />
             </View>

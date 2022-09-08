@@ -1,28 +1,58 @@
-import { StyleSheet, TextInput} from 'react-native'
-import React from 'react'
-import { Colors } from '../theme/Colors'
+import { StyleSheet, TextInput, View, Text } from "react-native";
+import React, { useState } from "react";
+import { Colors } from "../theme/Colors";
+import { Ionicons } from "@expo/vector-icons";
+import { stylesMyInput } from "./style/StyleMyInput";
 
-const MyInput = ({label, keyboardType,secureTextEntry}) => {
+const MyInput = ({
+  label,
+  keyboardType,
+  secureTextEntry,
+  value,
+  onChangeText,
+  icons,
+  showPassword,
+  setshowPassword,
+  error,
+  onFocus = () => { }
+}) => {
+  const [isFocused, setIsFocused] = useState(false);
   return (
-    <TextInput
-    placeholder={label}
-    keyboardType={keyboardType}
-    secureTextEntry={secureTextEntry}
-    style={styles.input}
-    />
-  )
-}
+    <View>
+      <View style={stylesMyInput.viewStyle}>
+        <Text style={stylesMyInput.textEmailP}>{label}</Text>
+        <Text style={stylesMyInput.errorMensage}>{error}</Text>
+      </View>
+      <View style={stylesMyInput.container}>
+        <TextInput
+          placeholder={label}
+          keyboardType={keyboardType}
+          secureTextEntry={secureTextEntry}
+          style={[
+            stylesMyInput.input,
+            { borderColor: error ? Colors.red : isFocused ? Colors.blue : null }
+          ]}
+          value={value}
+          onChangeText={onChangeText}
+          onFocus={() => {
+            onFocus();
+            setIsFocused(true);
+          }}
+        />
+        {icons === "eye" && (
+          <Ionicons
+            name={showPassword ? "eye" : "eye-off"}
+            onPress={() => {
+              setshowPassword(!showPassword);
+            }}
+            style={stylesMyInput.icon}
+            color={isFocused ? Colors.blue : Colors.grey}
+          />
+        )}
+      </View>
+    </View>
+  );
+};
 
-export default MyInput
 
-const styles = StyleSheet.create({
-  input:{
-    paddingLeft:8,
-    alignSelf:'center',
-    width:'100%',
-    height: 50,
-    borderWidth: 1,
-    borderColor: Colors.black,
-    borderRadius:8,
-  },
-})
+export default MyInput;

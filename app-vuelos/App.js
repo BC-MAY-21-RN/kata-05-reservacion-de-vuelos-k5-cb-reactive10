@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
+<<<<<<< HEAD
 import {
   StyleSheet,
   Text,
@@ -16,10 +16,13 @@ import { Colors } from "../app-vuelos/src/theme/Colors";
 import LottieView from "lottie-react-native";
 import MyInput from "./src/components/MyInput";
 import LoginScreen from "./src/views/LoginScreen";
+=======
+import SignUp from "./src/views/SignUp";
+>>>>>>> master
 
-export default function App() {
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+const App = () => {
   return (
+<<<<<<< HEAD
     <SafeAreaView style={styles.container}>
       <Text
         style={{
@@ -130,23 +133,13 @@ export default function App() {
 
 
     </SafeAreaView>
+=======
+    <>
+      <StatusBar style="dark" />
+      <SignUp />
+    </>
+>>>>>>> master
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignSelf: "center",
-    width: "90%"
-    //backgroundColor: Colors.primary,
-  },
-  input: {
-    paddingLeft: 8,
-    alignSelf: "center",
-    width: "100%",
-    height: 50,
-    borderWidth: 1,
-    borderColor: Colors.black,
-    borderRadius: 8
-  }
-});
+export default App;

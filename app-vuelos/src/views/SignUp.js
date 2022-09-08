@@ -43,7 +43,10 @@ const SignUp = () => {
       isValid = false;
     }
 
+<<<<<<< HEAD
     
+=======
+>>>>>>> master
     if (!inputs.password) {
       handleError("*Please input password", "password");
       isValid = false;

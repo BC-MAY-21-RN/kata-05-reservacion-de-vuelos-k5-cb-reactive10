@@ -5,9 +5,11 @@ import LoginScreen from "./src/views/LoginScreen";
 import RootNativagtions from "./src/navigations/RootNativagtions";
 
 const App = () => {
-  return <LoginScreen />;
+  return (
+  <LoginScreen />
   // <RootNativagtions/>
-  //  <SignUp />;
+  //  <SignUp />
+  )
 };
 
 export default App;

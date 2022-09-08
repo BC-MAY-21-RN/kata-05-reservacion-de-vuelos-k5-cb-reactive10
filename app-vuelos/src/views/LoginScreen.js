@@ -13,6 +13,7 @@ import LottieView from "lottie-react-native";
 import { StatusBar } from "expo-status-bar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import MyInput from "../components/MyInput";
+import MyButton from "../components/MyButton";
 
 const uri =
   "https://images.unsplash.com/photo-1527517928481-bcf8d6534de0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGF2aWFjaW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
@@ -63,22 +64,25 @@ export default function LoginScreen() {
                 secureTextEntry={true}
               />
             </View>
-            <TouchableOpacity
-              onPress={() => console.log("handleSignIn")}
-              style={[styles.button, { backgroundColor: "#00CFEB90" }]}
-            >
-              <Text style={{ fontSize: 17, fontWeight: "400", color: "white" }}>
-                Login
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => console.log("handleCreateAccount")}
-              style={[styles.button, { backgroundColor: "#6792F090" }]}
-            >
-              <Text style={{ fontSize: 17, fontWeight: "400", color: "white" }}>
-                SignUp With Google
-              </Text>
-            </TouchableOpacity>
+
+
+            <MyButton 
+             text={" Login "}
+             alertText={"Press Btn Sing Up"}
+             name={"sing"}
+             onPress={() => console.log("handleSignIn")}
+
+            /> 
+
+            <MyButton 
+             text={"Sign Up with Google "}
+             alertText={"Press Btn Sing Up"}
+             name={"sing"}
+             onPress={() => console.log("handleCreateAccount")}
+
+            
+            />
+
             <Text
               style={{ alignSelf: "flex-end", color: "#ffffff90" }}
               onPress={() => alert("Navigate Register")}

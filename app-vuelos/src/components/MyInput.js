@@ -15,9 +15,11 @@ const MyInput = ({
   setshowPassword,
   error,
   borderColor,
-  onFocus = () => { }
+  backgroundColor,
+  onFocus = () => {}
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+  console.log(backgroundColor);
   return (
     <View>
       <View style={stylesMyInput.viewStyle}>
@@ -31,7 +33,14 @@ const MyInput = ({
           secureTextEntry={secureTextEntry}
           style={[
             stylesMyInput.input,
-            { borderColor: error ? Colors.red : isFocused ? Colors.blue : borderColor={borderColor} }
+            {
+              borderColor: error
+                ? Colors.red
+                : isFocused
+                ? Colors.blue
+                : Colors.grey2,
+              backgroundColor: "#ffffff60"
+            }
           ]}
           value={value}
           onChangeText={onChangeText}
@@ -54,6 +63,5 @@ const MyInput = ({
     </View>
   );
 };
-
 
 export default MyInput;

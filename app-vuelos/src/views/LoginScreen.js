@@ -6,7 +6,8 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  SafeAreaView
 } from "react-native";
 import { BlurView } from "expo-blur";
 import LottieView from "lottie-react-native";
@@ -23,77 +24,66 @@ export default function LoginScreen() {
   const [password, setPassword] = React.useState("");
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
-      <KeyboardAwareScrollView />
       <Image source={{ uri }} style={[styles.image, StyleSheet.absoluteFill]} />
-      <ScrollView
-        contentContainerStyle={{
-          flex: 1,
-          width: "100%",
-          height: "100%",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
-      >
-        <BlurView intensity={80}>
-          <View style={styles.login}>
-            <LottieView
-              autoPlay
-              style={{
-                width: 200,
-                height: 170
-              }}
-              source={require("../../assets/flights.json")}
-            />
-            <View>
-
-              <MyInput
-                borderColor="#fff"
-                label={'Email'}
-                keyboardType={'email-address'}
+      <KeyboardAwareScrollView style={{ marginTop: 30, paddingTop: 30 }}>
+        <ScrollView
+          contentContainerStyle={{
+            flex: 1,
+            width: "100%",
+            height: "100%",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <BlurView intensity={70}>
+            <View style={styles.login}>
+              <LottieView
+                autoPlay
+                style={{
+                  width: 200,
+                  height: 170
+                }}
+                source={require("../../assets/flights.json")}
               />
+              <View>
+                <MyInput
+                  borderColor="#fff"
+                  label={"Email"}
+                  keyboardType={"email-address"}
+                />
 
+                <MyInput
+                  borderColor="#fff"
+                  label={"Password"}
+                  keyboardType={"keyboardType"}
+                  secureTextEntry={true}
+                  //backgroundColor={'#ffffff90'}
+                />
+
+                <MyButton
+                  text={" Login "}
+                  alertText={"Press Btn Sing Up"}
+                  onPress={() => console.log("handleSignIn")}
+                />
+
+                <MyButton
+                  text={"Sign Up with Google "}
+                  name={"google"}
+                  onPress={() => console.log("handleCreateAccount")}
+                />
+
+                <MyButton
+                  text={"Register "}
+                  onPress={() => alert("Navigate Register")}
+                />
+              </View>
             </View>
-
-            <View>
-              <MyInput
-                borderColor="#fff"
-                label={'Password'}
-                keyboardType={'keyboardType'}
-                secureTextEntry={true}
-              />
-            </View>
-
-
-            <MyButton 
-             text={" Login "}
-             alertText={"Press Btn Sing Up"}
-             name={"sing"}
-             onPress={() => console.log("handleSignIn")}
-
-            /> 
-
-            <MyButton 
-             text={"Sign Up with Google "}
-             alertText={"Press Btn Sing Up"}
-             name={"sing"}
-             onPress={() => console.log("handleCreateAccount")}
-
-            
-            />
-
-            <Text
-              style={{ alignSelf: "flex-end", color: "#ffffff90" }}
-              onPress={() => alert("Navigate Register")}
-            >
-              Register
-            </Text>
-          </View>
-        </BlurView>
-      </ScrollView>
-      <KeyboardAwareScrollView />
-    </View>
+          </BlurView>
+        </ScrollView>
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -111,11 +101,11 @@ const styles = StyleSheet.create({
     opacity: 0.45
   },
   login: {
-    width: 350,
-    height: 520,
+    width: "95%",
+    height: 650,
     borderColor: "#fff",
     borderWidth: 1,
-    borderRadius: 4,
+    borderRadius: 8,
     padding: 10,
     alignItems: "center",
     opacity: 0.8

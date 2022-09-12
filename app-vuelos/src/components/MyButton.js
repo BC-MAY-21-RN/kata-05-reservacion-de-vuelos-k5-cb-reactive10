@@ -5,19 +5,21 @@ import React, { useState } from "react";
 import { Colors } from "../theme/Colors";
 import { stylesMyButton } from "./style/StyleMyButton";
 
-const MyButton = ({ text, name, onPress }) => {
+const MyButton = ({ text, name, onPress, btnColor }) => {
   const [isPressColor, setIsPressColor] = useState(Colors.grey2);
   //funcion para cambiar el color
   const changeColorBtn = () => {
-    let color = Colors.blue;
+    let color = Colors.grey2;
     setIsPressColor(color);
   };
-
   return (
     <>
       <TouchableOpacity onPress={onPress} onPressIn={changeColorBtn}>
         <View
-          style={[stylesMyButton.container, { backgroundColor: isPressColor }]}
+          style={[
+            stylesMyButton.container,
+            { backgroundColor: btnColor === true ? Colors.blue : isPressColor }
+          ]}
         >
           <Text style={stylesMyButton.txtBtn}>{text}</Text>
         </View>

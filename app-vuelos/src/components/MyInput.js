@@ -19,7 +19,6 @@ const MyInput = ({
   onFocus = () => {}
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  console.log(backgroundColor);
   return (
     <View>
       <View style={stylesMyInput.viewStyle}>
@@ -39,7 +38,7 @@ const MyInput = ({
                 : isFocused
                 ? Colors.blue
                 : Colors.grey2,
-              backgroundColor: "#ffffff60"
+              backgroundColor: Colors.white2
             }
           ]}
           value={value}

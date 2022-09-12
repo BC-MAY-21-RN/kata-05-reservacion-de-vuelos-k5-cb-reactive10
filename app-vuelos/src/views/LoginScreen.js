@@ -1,4 +1,4 @@
-import Reactm, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Image,
   Text,
@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
   SafeAreaView,
-  Keyboard,
+  Keyboard
 } from "react-native";
 import { BlurView } from "expo-blur";
 import LottieView from "lottie-react-native";
@@ -17,16 +17,19 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import { stylesLogin } from "../views/style/StyleLogin";
+import { useNavigation } from "@react-navigation/native";
+import SignUp from "./SignUp";
 
 const uri =
   "https://images.unsplash.com/photo-1527517928481-bcf8d6534de0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGF2aWFjaW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
 
 export default function LoginScreen() {
+  const navigation = useNavigation();
   const [inputs, setInputs] = useState({
     email: "",
-    password: "",
+    password: ""
   });
-
+  const [btnColor, setBtnColor] = useState(false);
   const [errors, setErrors] = useState({});
   const [showPassword, setshowPassword] = useState(false);
 
@@ -58,7 +61,8 @@ export default function LoginScreen() {
     }
 
     if (isValid) {
-      register();
+      // register();
+      console.log(alert("user Loggin"));
     }
   };
 
@@ -69,6 +73,14 @@ export default function LoginScreen() {
   const handleError = (error, input) => {
     setErrors((prevState) => ({ ...prevState, [input]: error }));
   };
+
+  useEffect(() => {
+    if (inputs.email !== "" && inputs.password !== "") {
+      setBtnColor(true);
+    } else {
+      setBtnColor(false);
+    }
+  }, [inputs.password]);
 
   return (
     <SafeAreaView style={stylesLogin.container}>
@@ -88,7 +100,6 @@ export default function LoginScreen() {
               />
               <View>
                 <MyInput
-                  borderColor="#fff"
                   label={"Email"}
                   keyboardType={"email-address"}
                   onChangeText={(text) => handleOnchange(text, "email")}
@@ -97,13 +108,10 @@ export default function LoginScreen() {
                 />
 
                 <MyInput
-                  borderColor="#fff"
                   label={"Password"}
                   keyboardType={"keyboardType"}
                   secureTextEntry={true}
-                  //backgroundColor={'#ffffff90'}
                   onChangeText={(text) => handleOnchange(text, "password")}
-                  //onChangeText={(e) => setInput({ ...input, password: e })}
                   showPassword={showPassword}
                   setshowPassword={setshowPassword}
                   error={errors.password}
@@ -115,6 +123,7 @@ export default function LoginScreen() {
                     text={" Login "}
                     alertText={"Press Btn Sing Up"}
                     onPress={validate}
+                    btnColor={btnColor}
                   />
 
                   <MyButton
@@ -125,7 +134,7 @@ export default function LoginScreen() {
                 </View>
 
                 <Text
-                  onPress={() => alert("Navigate Register")}
+                  onPress={() => navigation.navigate(SignUp)}
                   style={stylesLogin.textStyles}
                 >
                   Register
@@ -138,4 +147,3 @@ export default function LoginScreen() {
     </SafeAreaView>
   );
 }
-

@@ -62,7 +62,6 @@ export default function LoginScreen() {
 
     if (isValid) {
       // register();
-      console.log(alert("user Loggin"));
     }
   };
 

@@ -1,13 +1,6 @@
-import { StatusBar } from "expo-status-bar";
-import SignUp from "./src/views/SignUp";
+import RootNativagtions from "./src/navigations/RootNativagtions";
 
 const App = () => {
-  return (
-    <>
-      <StatusBar style="dark" />
-      <SignUp />
-    </>
-  );
+  return <RootNativagtions />;
 };
-
 export default App;

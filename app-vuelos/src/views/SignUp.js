@@ -1,8 +1,10 @@
 //imports system
 import React, { useState } from "react";
 import Checkbox from "expo-checkbox";
+import { StatusBar } from "expo-status-bar";
 import { Text, SafeAreaView, View, Keyboard } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useNavigation } from "@react-navigation/native";
 
 //imports theme and styles user
 import { Colors } from "../theme/Colors";
@@ -11,8 +13,10 @@ import { stylesSignUp } from "./style/StyleSigUp";
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import Title from "../components/Title";
+import LoginScreen from "./LoginScreen";
 
 const SignUp = () => {
+  const navigation = useNavigation();
   //useStates
   const [isChecked, setChecked] = useState(false);
   const [isCheckedAux, setCheckedAux] = useState(false);
@@ -23,7 +27,6 @@ const SignUp = () => {
   });
   const [showPassword, setshowPassword] = useState(false);
   const [errors, setErrors] = useState({});
-  ////////
   const [loading, setLoading] = useState(false);
 
   const validate = () => {
@@ -49,7 +52,11 @@ const SignUp = () => {
     } else if (inputs.password.length < 8) {
       handleError("*Min password length of 8", "password");
       isValid = false;
-    } else if (!inputs.password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)) {
+    } else if (
+      !inputs.password.match(
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
+      )
+    ) {
       handleError("*Please input a valid password", "password");
       isValid = false;
     }
@@ -75,7 +82,6 @@ const SignUp = () => {
       }
     }, 1500);
   };
-  ////////
 
   //functions
   const handleOnchange = (text, input) => {
@@ -87,40 +93,33 @@ const SignUp = () => {
 
   return (
     <SafeAreaView style={stylesSignUp.container}>
+      <StatusBar style="dark" />
       <KeyboardAwareScrollView>
         <Title titleContent={"Sign Up"} />
         <MyInput
           label={"Firts Name"}
           keyboardType="default"
-          //value={input.name}
           onChangeText={(text) => handleOnchange(text, "name")}
-          //onChangeText={(e) => setInput({ ...input, name: e })}
           error={errors.name}
           onFocus={() => handleError(null, "name")}
         />
         <MyInput
           label={"Email *"}
           keyboardType="email-address"
-          //value={input.email}
           onChangeText={(text) => handleOnchange(text, "email")}
-          //onChangeText={(e) => setInput({ ...input, email: e })}
           error={errors.email}
           onFocus={() => handleError(null, "email")}
         />
         <MyInput
           label={"Password *"}
           secureTextEntry={!showPassword}
-          //value={input.password}
           onChangeText={(text) => handleOnchange(text, "password")}
-          //onChangeText={(e) => setInput({ ...input, password: e })}
           icons={"eye"}
           showPassword={showPassword}
           setshowPassword={setshowPassword}
           error={errors.password}
           onFocus={() => handleError(null, "password")}
         />
-
-
 
         <Text style={stylesSignUp.txtPassw}>
           Use 8 or more characters with a mix of letters, numbers, and symbols
@@ -180,6 +179,7 @@ const SignUp = () => {
         >
           Already have an account?{"  "}
           <Text
+            onPress={() => navigation.navigate(LoginScreen)}
             style={{
               textDecorationLine: "underline",
               color: Colors.blue

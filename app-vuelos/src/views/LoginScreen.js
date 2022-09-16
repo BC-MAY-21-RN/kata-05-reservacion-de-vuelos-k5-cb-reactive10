@@ -18,7 +18,6 @@ import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import { stylesLogin } from "../views/style/StyleLogin";
 import { useNavigation } from "@react-navigation/native";
-import SignUp from "./SignUp";
 
 const uri =
   "https://images.unsplash.com/photo-1527517928481-bcf8d6534de0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGF2aWFjaW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
@@ -62,6 +61,7 @@ export default function LoginScreen() {
 
     if (isValid) {
       // register();
+      console.log(alert("user Loggin"));
     }
   };
 
@@ -133,10 +133,17 @@ export default function LoginScreen() {
                 </View>
 
                 <Text
-                  onPress={() => navigation.navigate(SignUp)}
+                  onPress={() => navigation.navigate("SignUp")}
                   style={stylesLogin.textStyles}
                 >
                   Register
+                </Text>
+
+                <Text
+                  onPress={() => navigation.navigate("Fligths")}
+                  style={stylesLogin.textStyles}
+                >
+                  MyFlights
                 </Text>
               </View>
             </View>

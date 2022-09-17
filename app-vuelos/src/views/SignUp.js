@@ -15,6 +15,12 @@ import MyButton from "../components/MyButton";
 import Title from "../components/Title";
 import LoginScreen from "./LoginScreen";
 
+// firebase 
+import {handleCreateAcount} from "../../db/auth-firebase"
+
+
+
+
 const SignUp = () => {
   const navigation = useNavigation();
   //useStates
@@ -77,6 +83,8 @@ const SignUp = () => {
         setLoading(false);
         //navigation.navigate('LoginScreen');
         alert("GOOOO GOOOOOO!!!!");
+        handleCreateAcount(inputs.email,inputs.password,inputs.name)
+
       } catch (error) {
         alert("Error", "Something went wrong");
       }
@@ -90,6 +98,10 @@ const SignUp = () => {
   const handleError = (error, input) => {
     setErrors((prevState) => ({ ...prevState, [input]: error }));
   };
+
+
+
+
 
   return (
     <SafeAreaView style={stylesSignUp.container}>

@@ -19,6 +19,7 @@ import MyButton from "../components/MyButton";
 import { stylesLogin } from "../views/style/StyleLogin";
 import { useNavigation } from "@react-navigation/native";
 import SignUp from "./SignUp";
+import{signInAcount} from "../../db/auth-firebase"
 
 const uri =
   "https://images.unsplash.com/photo-1527517928481-bcf8d6534de0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGF2aWFjaW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
@@ -29,9 +30,21 @@ export default function LoginScreen() {
     email: "",
     password: ""
   });
+  const [loginState,setLoginState]= useState(false)
+  console.log(loginState)
   const [btnColor, setBtnColor] = useState(false);
   const [errors, setErrors] = useState({});
   const [showPassword, setshowPassword] = useState(false);
+
+  useEffect(() => {
+    
+      navigation.navigate("HomePrueba")
+     
+  }, [loginState])
+  
+
+
+
 
   const validate = () => {
     Keyboard.dismiss();
@@ -62,6 +75,9 @@ export default function LoginScreen() {
 
     if (isValid) {
       // register();
+       signInAcount(inputs.email,inputs.password,setLoginState);
+      
+
     }
   };
 

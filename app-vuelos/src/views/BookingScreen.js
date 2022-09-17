@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import React from "react";
+import { stylesBoking } from "./style/StyleBooking";
 
 const BookinScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text onLongPress={() => navigation.goBack()} style={styles.txt}>
+    <View style={stylesBoking.container}>
+      <Text onLongPress={() => navigation.goBack()} style={stylesBoking.txt}>
         BookinScreen
       </Text>
     </View>
@@ -12,16 +13,3 @@ const BookinScreen = ({ navigation }) => {
 };
 
 export default BookinScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  txt: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "tomato"
-  }
-});

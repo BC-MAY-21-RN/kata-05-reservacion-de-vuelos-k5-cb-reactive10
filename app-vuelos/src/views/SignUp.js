@@ -74,8 +74,6 @@ const SignUp = () => {
     setTimeout(() => {
       try {
         setLoading(false);
-        //console.log({ inputs });
-        //navigation.navigate('LoginScreen');
         alert("GOOO");
       } catch (error) {
         alert("Error", "Something went wrong");
@@ -87,8 +85,8 @@ const SignUp = () => {
   const handleOnchange = (text, inputs) => {
     setInputs((prevState) => ({ ...prevState, [inputs]: text }));
   };
-  const handleError = (error, inputs) => {
-    setErrors((prevState) => ({ ...prevState, [inputs]: error }));
+  const handleError = (errors, inputs) => {
+    setErrors((prevState) => ({ ...prevState, [inputs]: errors }));
   };
 
   return (

@@ -6,13 +6,11 @@ import LoginScreen from "../views/LoginScreen";
 import SignUp from "../views/SignUp";
 import MyFlights from "../views/MyFlights";
 import BookingScreen from "../views/BookingScreen";
+//configStack
+import { myConfigHeader } from "../utils/helpers";
 
 //Creamos el stack
 const Stack = createNativeStackNavigator();
-
-const myConfigHeader = {
-  headerShown: false
-};
 
 const MyStack = () => {
   return (

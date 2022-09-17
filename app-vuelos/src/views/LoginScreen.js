@@ -22,7 +22,7 @@ import { useNavigation } from "@react-navigation/native";
 const uri =
   "https://images.unsplash.com/photo-1527517928481-bcf8d6534de0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGF2aWFjaW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
 
-export default function LoginScreen() {
+const LoginScreen = () => {
   const navigation = useNavigation();
   const [inputs, setInputs] = useState({
     email: "",
@@ -152,4 +152,6 @@ export default function LoginScreen() {
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
-}
+};
+
+export default LoginScreen;

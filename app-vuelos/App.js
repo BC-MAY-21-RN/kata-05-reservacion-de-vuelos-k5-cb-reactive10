@@ -1,6 +1,8 @@
 import RootNativagtions from "./src/navigations/RootNativagtions";
+import BookingScreen from "./src/views/BookingScreen";
 
 const App = () => {
-  return <RootNativagtions />;
+  return <BookingScreen />
+  //<RootNativagtions />;
 };
 export default App;

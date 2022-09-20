@@ -18,11 +18,11 @@ export default function HomePrueba() {
   const user = auth;
   console.log(user)
 
-console.log("correo",user.currentUser.email)
+console.log("correo",user.currentUser?.email)
 
 useEffect(() => {
   getCities()
-//   addFlights()
+  // addFlights()
 //   getCountries()
 }, [])
 
@@ -52,27 +52,28 @@ let flightData =[]
     queryFlights.forEach((doc) => {
   flightData.push({id:doc.id,data: doc.data()});
 });
+console.log(flightData)
 setData(flightData)
 
 
 }
 
- // --------------- ADD DATA ----------------//
-//   const docData = {  
-//     llegada: {  pais:"PAR", codigo: "MEX"} ,
-//     origen:  {  pais:"URUGUAY", codigo: "CHI"} ,
+ //--------------- ADD DATA ----------------//
+  const docData = {  
+    llegada: {  pais:"PAR", codigo: "MEX"} ,
+    origen:  {  pais:"URUGUAY", codigo: "CHI"} ,
   
-//     pasajeros: 3,
-//     fecha: Timestamp.fromDate(new Date("December 2, 2022")),
-//    email: user.currentUser.email
+    pasajeros: 3,
+    fecha: Timestamp.fromDate(new Date("December 2, 2022")),
+   email: user.currentUser.email
    
    
-//    }
+   }
 
 
-// async function  addFlights (){
-//   await addDoc(collection(db, "flights"), docData);
-// }
+async function  addFlights (){
+  await addDoc(collection(db, "flights"), docData);
+}
 //----------------------------------------------//
 
 
@@ -81,7 +82,7 @@ setData(flightData)
     <SafeAreaView style={stylesLogin.container}>
      
       <Text style={{color:"white", fontSize:50  }}> {data[0]?.data.email}</Text>
-     
+      {/* <Text >   </Text> */}
 
     </SafeAreaView>
   );

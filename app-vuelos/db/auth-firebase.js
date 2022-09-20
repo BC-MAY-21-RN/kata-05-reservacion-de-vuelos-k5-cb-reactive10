@@ -42,7 +42,7 @@ export function signInAcount(email,password,setLoginState){
       console.log("loginnnnnnnnnnnnnnnnn")
       const user = result.user;
       console.log(user.email)
-    //   navigation.navigate("Home")
+      navigation.navigate("HomePrueba")
     if (user.email){
         setLoginState(true)
 

@@ -7,9 +7,10 @@ export const stylesTitle = StyleSheet.create({
           color: Colors.blue,
           fontWeight: "bold",
           fontSize: 25,
-          marginBottom: 13
+        },
+        titleBookingS: {
+          color: 'black',
+          fontWeight: "bold",
+          fontSize: 35,
         }
-      
-
-
 });

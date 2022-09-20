@@ -5,8 +5,13 @@ import MySelectLocation from "../components/MySelectLocation";
 import TextBooking from "../components/TextBooking";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../theme/Colors";
+import { useNavigation } from "@react-navigation/native";
+
+
 
 export default function BookingScreen() {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.iconStyle}>
@@ -22,7 +27,7 @@ export default function BookingScreen() {
       </View>
 
       <View style={styles.buttonStyle}>
-        <MyButton text={" Next "} />
+        <MyButton text={" Next "} onPress={() => navigation.navigate("Calendars")} />
       </View>
     </SafeAreaView>
   );

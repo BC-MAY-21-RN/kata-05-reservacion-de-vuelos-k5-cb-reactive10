@@ -14,6 +14,11 @@ const ModalPicker = (props) => {
     props.setCode(code);
     props.setCityInitial(country);
   };
+  const onPressItem2 = (country, code) => {
+    props.changeModalVisibility(false);
+    props.setCode2(code);
+    props.setCityInitial2(country);
+  };
 
   //function del flashlist
   const renderItem = ({ item }) => {
@@ -22,6 +27,19 @@ const ModalPicker = (props) => {
       <TouchableOpacity
         style={styleModalPicker.option}
         onPress={() => onPressItem(country, code)}
+      >
+        <Text style={styleModalPicker.text}>
+          {country},{code}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+  const renderItem2 = ({ item }) => {
+    const { country, code } = item;
+    return (
+      <TouchableOpacity
+        style={styleModalPicker.option}
+        onPress={() => onPressItem2(country, code)}
       >
         <Text style={styleModalPicker.text}>
           {country},{code}
@@ -43,7 +61,7 @@ const ModalPicker = (props) => {
         <FlashList
           data={citys}
           contentContainerStyle={styleModalPicker.contentContainerStyle}
-          renderItem={renderItem}
+          renderItem={props.name === "initial" ? renderItem : renderItem2}
           estimatedItemSize={200}
           numColumns={1}
         />

@@ -12,14 +12,21 @@ import { useSelector } from "react-redux";
 
 export default function BookingScreen() {
   const navigation = useNavigation();
-  const estado = useSelector((state) => state.stateGlobal.chooseCodeIntial);
-  const estado2 = useSelector((state) => state.stateGlobal.cityInitialChoose);
+  const routeInitial = useSelector(
+    (state) => state.stateGlobal.chooseCodeIntial
+  );
+  const cityInitial = useSelector(
+    (state) => state.stateGlobal.cityInitialChoose
+  );
 
   return (
     <SafeAreaView style={stylesBookingScreen.container}>
       <KeyboardAwareScrollView>
         <IconBack />
-        <ComponentListFlight routeInitial={estado2} cityInitial={estado} />
+        <ComponentListFlight
+          routeInitial={routeInitial}
+          cityInitial={cityInitial}
+        />
         <View style={stylesBookingScreen.title}>
           <TextBooking titleContent={"Where will you be"} />
           <TextBooking titleContent={"flying to?"} />

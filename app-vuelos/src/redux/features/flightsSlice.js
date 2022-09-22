@@ -34,6 +34,13 @@ export const flightsSlice = createSlice({
   }
 });
 
-export const { handleCodeInitial, handleCityInitial } = flightsSlice.actions;
+export const {
+  handleCodeInitial,
+  handleCityInitial,
+  handleCodeFinal,
+  handleCityFinal,
+  handlFechaViaje,
+  handlePassengers
+} = flightsSlice.actions;
 
 export default flightsSlice.reducer;

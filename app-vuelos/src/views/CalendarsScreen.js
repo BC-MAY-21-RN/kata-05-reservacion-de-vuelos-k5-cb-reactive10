@@ -12,9 +12,14 @@ import { useSelector } from "react-redux";
 import ComponentListFlight from "../components/ComponentListFlight";
 
 export default function CalendarScreen() {
-  const estado = useSelector((state) => state.stateGlobal.chooseCodeIntial);
-  const estado2 = useSelector((state) => state.stateGlobal.cityInitialChoose);
-  //console.log(estado, "Estado en BookingScreen");
+  const routeInitial = useSelector(
+    (state) => state.stateGlobal.chooseCodeIntial
+  );
+  const cityInitial = useSelector(
+    (state) => state.stateGlobal.cityInitialChoose
+  );
+  const cityFinal = useSelector((state) => state.stateGlobal.cityFinalChoose);
+  const routeFinal = useSelector((state) => state.stateGlobal.chooseCodeFinal);
 
   const [day, setDay] = useState("");
   // se guarda el dia seleccionadooooo
@@ -29,7 +34,12 @@ export default function CalendarScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ marginTop: 30 }}>
-        <ComponentListFlight routeInitial={estado2} cityInitial={estado} />
+        <ComponentListFlight
+          routeInitial={routeInitial}
+          cityInitial={cityInitial}
+          routeFinal={routeFinal}
+          cityFinal={cityFinal}
+        />
       </View>
       <Calendar
         style={{

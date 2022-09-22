@@ -20,7 +20,7 @@ const BookingScreen = () => {
           <TextBooking titleContent={"now?"} />
         </View>
         <View style={stylesBookingScreen.input}>
-          <MySelectLocation />
+          <MySelectLocation name={"initial"} />
         </View>
         <View>
           <View style={stylesBookingScreen.buttonStyle}>

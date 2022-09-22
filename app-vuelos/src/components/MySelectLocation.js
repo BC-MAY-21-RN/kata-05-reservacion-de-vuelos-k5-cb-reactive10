@@ -2,20 +2,27 @@ import React, { useState } from "react";
 import { Modal, SafeAreaView, Text, View } from "react-native";
 import { styleSelectLocation } from "./style/StyleSelectLocation";
 import { ModalPicker } from "./ModalPicker";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   handleCodeInitial,
-  handleCityInitial
+  handleCityInitial,
+  handleCityFinal,
+  handleCodeFinal
 } from "../redux/features/flightsSlice";
 
-const MySelectLocation = () => {
+const MySelectLocation = ({ name }) => {
+  const location2 = useSelector((state) => state.stateGlobal.cityFinalChoose);
+  const code2 = useSelector((state) => state.stateGlobal.chooseCodeFinal);
   //REDUX Dispatch
   const dispatch = useDispatch();
 
   //state para el Modal
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  //input data modal
   const [chooseData, setChooseData] = useState("Select Location");
   const [chooseCode, setChooseCode] = useState("");
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [chooseCityFinal, setchooseCityFinal] = useState("Select Location");
+  const [chooseRouteFinal, setchooseRouteFinal] = useState("");
 
   const changeModalVisibility = (parameter) => {
     setIsModalVisible(parameter);
@@ -24,23 +31,43 @@ const MySelectLocation = () => {
   //actualizar estado redux
   const setCode = (code) => {
     setChooseCode(code);
-    dispatch(handleCityInitial(code));
+    dispatch(handleCodeInitial(code));
   };
 
   const setCityInitial = (cityInitial) => {
     setChooseData(cityInitial);
-    dispatch(handleCodeInitial(cityInitial));
+    dispatch(handleCityInitial(cityInitial));
+  };
+
+  //actualizar estado redux
+  const setCode2 = (code) => {
+    setchooseRouteFinal(code);
+    dispatch(handleCodeFinal(code));
+  };
+
+  const setCityInitial2 = (cityInitial) => {
+    setchooseCityFinal(cityInitial);
+    dispatch(handleCityFinal(cityInitial));
   };
 
   return (
     <SafeAreaView>
       <View style={styleSelectLocation.txtSelect}>
-        <Text
-          onPress={() => changeModalVisibility(true)}
-          style={styleSelectLocation.text}
-        >
-          {chooseData},{chooseCode}
-        </Text>
+        {name === "initial" ? (
+          <Text
+            onPress={() => changeModalVisibility(true)}
+            style={styleSelectLocation.text}
+          >
+            {chooseData},{chooseCode}
+          </Text>
+        ) : (
+          <Text
+            onPress={() => changeModalVisibility(true)}
+            style={styleSelectLocation.text}
+          >
+            {chooseCityFinal},{chooseRouteFinal}
+          </Text>
+        )}
       </View>
       <Modal
         transparent
@@ -49,9 +76,12 @@ const MySelectLocation = () => {
         nRequestClose={() => changeModalVisibility(false)}
       >
         <ModalPicker
+          name={name}
           changeModalVisibility={changeModalVisibility}
           setCityInitial={setCityInitial}
           setCode={setCode}
+          setCode2={setCode2}
+          setCityInitial2={setCityInitial2}
         />
       </Modal>
     </SafeAreaView>

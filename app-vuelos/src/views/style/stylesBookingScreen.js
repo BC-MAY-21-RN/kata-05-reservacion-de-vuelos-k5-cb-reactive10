@@ -1,14 +1,14 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "../../theme/Colors";
 
 export const stylesBookingScreen = StyleSheet.create({
   buttonStyle: {
-    position: "absolute",
+    position: "relative",
     bottom: 45,
     width: "90%",
     height: 40,
     justifyContent: "center",
-    alignSelf: "center"
+    alignSelf: "center",
+    marginTop: 280
   },
   input: {
     marginTop: 80
@@ -18,7 +18,8 @@ export const stylesBookingScreen = StyleSheet.create({
     marginLeft: 25
   },
   container: {
-    flex: 1
+    flex: 1,
+    marginTop: 30
   },
   iconStyle: {
     marginTop: 40,

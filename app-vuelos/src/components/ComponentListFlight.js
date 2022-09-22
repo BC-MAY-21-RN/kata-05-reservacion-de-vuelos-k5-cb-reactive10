@@ -4,9 +4,16 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { stylesListFlights } from "./style/StyleListFlights";
 import { Colors } from "../theme/Colors";
 
-const ComponentListFlight = (data) => {
-  const { cityInitial, cityFinal, routeInitial, routeFinal, passengers, date } =
-    data;
+const ComponentListFlight = ({
+  cityInitial,
+  cityFinal,
+  routeInitial,
+  routeFinal,
+  passengers,
+  date
+}) => {
+  // const { cityInitial, cityFinal, routeInitial, routeFinal, passengers, date } =
+  //   data;
   return (
     <>
       <View style={stylesListFlights.citysCode}>

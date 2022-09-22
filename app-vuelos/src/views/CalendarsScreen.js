@@ -8,10 +8,13 @@ import { Colors } from "../theme/Colors";
 import { AntDesign } from "@expo/vector-icons";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import { stylesLogin } from "../views/style/StyleLogin";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {handlFechaViaje} from "../redux/features/flightsSlice"
 import ComponentListFlight from "../components/ComponentListFlight";
 
 export default function CalendarScreen() {
+  const dispatch = useDispatch()
+
   const routeInitial = useSelector(
     (state) => state.stateGlobal.chooseCodeIntial
   );
@@ -23,6 +26,9 @@ export default function CalendarScreen() {
 
   const [day, setDay] = useState("");
   // se guarda el dia seleccionadooooo
+  const fechaSeleccionada = useSelector((state) => state.stateGlobal.fechaViaje);
+
+  console.log(fechaSeleccionada)
 
   let renderArrow = (direction) => {
     if (direction === "left") {
@@ -55,10 +61,12 @@ export default function CalendarScreen() {
         }}
         // cambiar por el dia actual
         initialDate={"2022-08-17"}
+        monthFormat={'MM dd yyyy'}
         minDate={"2022-08-17"}
         onDayPress={(day) => {
-          console.log("selected day", day);
-          setDay(day.dateString);
+          dispatch(handlFechaViaje(day))
+          // console.log("selected day", day);
+          // setDay(day.dateString);
         }}
         renderArrow={renderArrow}
         disableAllTouchEventsForDisabledDays={true}

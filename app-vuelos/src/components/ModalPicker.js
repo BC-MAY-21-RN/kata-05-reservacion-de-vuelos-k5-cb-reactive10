@@ -1,50 +1,30 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Dimensions,
-  ScrollView
-} from "react-native";
+import { Text, View, TouchableOpacity, Dimensions } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { citys } from "../data/citys";
-//const { code, country } = citys;
+import { styleModalPicker } from "./style/StyleModalPicker";
 
-const BD = citys;
-//const BD = ["MEX", "COL", "USA", "CHI", "BOG", "AMS"];
+//Constantes para el manejo de la modal
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
 
 const ModalPicker = (props) => {
-  const onPressItem = (option) => {
+  //Props para enviar a component padre
+  const onPressItem = (country, code) => {
     props.changeModalVisibility(false);
-    props.setData(option);
+    props.setCode(code);
+    props.setCityInitial(country);
   };
 
-  // const listData = BD.map((data, id) => {
-  //   return (
-  //     <TouchableOpacity
-  //       style={styles.option}
-  //       key={id}
-  //       onPress={() => onPressItem(data.code_IATA)}
-  //     >
-  //       <Text style={styles.text}>
-  //         {data.code_IATA} {data.country}
-  //       </Text>
-  //     </TouchableOpacity>
-  //   );
-  // });
-
+  //function del flashlist
   const renderItem = ({ item }) => {
     const { country, code } = item;
     return (
       <TouchableOpacity
-        style={styles.option}
-        //key={id}
-        onPress={() => onPressItem(country)}
+        style={styleModalPicker.option}
+        onPress={() => onPressItem(country, code)}
       >
-        <Text style={styles.text}>
-          {code} {country}
+        <Text style={styleModalPicker.text}>
+          {country},{code}
         </Text>
       </TouchableOpacity>
     );
@@ -52,16 +32,17 @@ const ModalPicker = (props) => {
   return (
     <TouchableOpacity
       onPress={() => props.changeModalVisibility(false)}
-      style={styles.container}
+      style={styleModalPicker.container}
     >
-      <View style={[styles.modal, { width: WIDTH - 20, height: HEIGHT / 2 }]}>
-        {/* <ScrollView>{listData}</ScrollView> */}
+      <View
+        style={[
+          styleModalPicker.modal,
+          { width: WIDTH - 20, height: HEIGHT / 2 }
+        ]}
+      >
         <FlashList
           data={citys}
-          contentContainerStyle={{
-            backgroundColor: "red",
-            paddingVertical: 5
-          }}
+          contentContainerStyle={styleModalPicker.contentContainerStyle}
           renderItem={renderItem}
           estimatedItemSize={200}
           numColumns={1}
@@ -71,23 +52,3 @@ const ModalPicker = (props) => {
   );
 };
 export { ModalPicker };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  modal: {
-    backgroundColor: "white",
-    borderRadius: 10
-  },
-  option: {
-    alignItems: "flex-start"
-  },
-  text: {
-    margin: 20,
-    fontSize: 20,
-    fontWeight: "bold"
-  }
-});

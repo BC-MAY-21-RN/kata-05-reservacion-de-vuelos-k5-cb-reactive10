@@ -1,10 +1,14 @@
 import { StyleSheet } from "react-native";
+import { Colors } from "../../theme/Colors";
 
 export const styleSelectLocation = StyleSheet.create({
-  inputStyle: {
-    borderBottomWidth: 1,
-    borderColor: "black",
-    width: "80%",
-    alignSelf: "center"
+  text: {
+    fontSize: 15,
+    color: Colors.grey
+  },
+  txtSelect: {
+    marginLeft: 20,
+    borderBottomColor: "grey",
+    borderBottomWidth: StyleSheet.hairlineWidth
   }
 });

@@ -12,8 +12,6 @@ const ComponentListFlight = ({
   passengers,
   date
 }) => {
-  // const { cityInitial, cityFinal, routeInitial, routeFinal, passengers, date } =
-  //   data;
   return (
     <>
       <View style={stylesListFlights.citysCode}>
@@ -34,9 +32,11 @@ const ComponentListFlight = ({
       </View>
       <View style={stylesListFlights.info}>
         <Text style={stylesListFlights.infotext}>{date}</Text>
-        <Text style={[stylesListFlights.infotext, { paddingBottom: 18 }]}>
-          {`${passengers} Passengers`}
-        </Text>
+        {passengers && (
+          <Text style={[stylesListFlights.infotext, { paddingBottom: 18 }]}>
+            {`${passengers} passengers`}
+          </Text>
+        )}
       </View>
     </>
   );

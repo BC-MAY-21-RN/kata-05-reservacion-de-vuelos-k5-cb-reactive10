@@ -4,21 +4,27 @@ import MyButton from "../components/MyButton";
 import MySelectLocation from "../components/MySelectLocation";
 import TextBooking from "../components/TextBooking";
 import IconBack from "../components/IconBack";
+import ComponentListFlight from "../components/ComponentListFlight";
 import { useNavigation } from "@react-navigation/native";
 import { stylesBookingScreen } from "./style/stylesBookingScreen";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useSelector } from "react-redux";
 
-const BookingScreen = () => {
+export default function BookingScreen() {
   const navigation = useNavigation();
+  const estado = useSelector((state) => state.stateGlobal.chooseCodeIntial);
+  const estado2 = useSelector((state) => state.stateGlobal.cityInitialChoose);
 
   return (
     <SafeAreaView style={stylesBookingScreen.container}>
       <KeyboardAwareScrollView>
         <IconBack />
+        <ComponentListFlight routeInitial={estado2} cityInitial={estado} />
         <View style={stylesBookingScreen.title}>
-          <TextBooking titleContent={"Where are you"} />
-          <TextBooking titleContent={"now?"} />
+          <TextBooking titleContent={"Where will you be"} />
+          <TextBooking titleContent={"flying to?"} />
         </View>
+
         <View style={stylesBookingScreen.input}>
           <MySelectLocation />
         </View>
@@ -26,13 +32,11 @@ const BookingScreen = () => {
           <View style={stylesBookingScreen.buttonStyle}>
             <MyButton
               text={" Next "}
-              onPress={() => navigation.navigate("BookingDestinity")}
+              onPress={() => navigation.navigate("Calendars")}
             />
           </View>
         </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
-};
-
-export default BookingScreen;
+}

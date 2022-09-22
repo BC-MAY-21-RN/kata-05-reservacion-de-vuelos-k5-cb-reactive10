@@ -20,9 +20,5 @@ export const stylesBookingScreen = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 30
-  },
-  iconStyle: {
-    marginTop: 40,
-    marginLeft: 25
   }
 });

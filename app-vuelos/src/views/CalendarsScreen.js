@@ -9,9 +9,11 @@ import { AntDesign } from "@expo/vector-icons";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import { stylesLogin } from "../views/style/StyleLogin";
 import { useSelector } from "react-redux";
+import ComponentListFlight from "../components/ComponentListFlight";
 
 export default function CalendarScreen() {
-  const estado = useSelector((state) => state.stateGlobal.chooseData);
+  const estado = useSelector((state) => state.stateGlobal.chooseCodeIntial);
+  const estado2 = useSelector((state) => state.stateGlobal.cityInitialChoose);
   //console.log(estado, "Estado en BookingScreen");
 
   const [day, setDay] = useState("");
@@ -26,10 +28,9 @@ export default function CalendarScreen() {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ marginTop: 30, backgroundColor: "yellowgreen" }}>
-        <Text style={{ fontWeight: "bold", fontSize: 35 }}>{estado}</Text>
+      <View style={{ marginTop: 30 }}>
+        <ComponentListFlight routeInitial={estado2} cityInitial={estado} />
       </View>
-
       <Calendar
         style={{
           height: "55%",

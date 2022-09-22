@@ -1,47 +1,45 @@
 import React, { useState } from "react";
-import {
-  Modal,
-  TouchableOpacity,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View
-} from "react-native";
+import { Modal, SafeAreaView, Text, View } from "react-native";
 import { styleSelectLocation } from "./style/StyleSelectLocation";
 import { ModalPicker } from "./ModalPicker";
-import { useDispatch, useSelector } from "react-redux";
-import { handleState } from "../redux/features/flightsSlice";
+import { useDispatch } from "react-redux";
+import {
+  handleCodeInitial,
+  handleCityInitial
+} from "../redux/features/flightsSlice";
 
-const MySelectLocation = (props) => {
-  //REDUX
+const MySelectLocation = () => {
+  //REDUX Dispatch
   const dispatch = useDispatch();
-  const estado = useSelector((state) => state.stateGlobal);
 
-  //
+  //state para el Modal
   const [chooseData, setChooseData] = useState("Select Location");
+  const [chooseCode, setChooseCode] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const changeModalVisibility = (parameter) => {
     setIsModalVisible(parameter);
   };
 
-  const setData = (option) => {
-    setChooseData(option);
-    dispatch(handleState(option));
+  //actualizar estado redux
+  const setCode = (code) => {
+    setChooseCode(code);
+    dispatch(handleCityInitial(code));
   };
-  console.log(estado);
+
+  const setCityInitial = (cityInitial) => {
+    setChooseData(cityInitial);
+    dispatch(handleCodeInitial(cityInitial));
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View
-        style={{
-          marginLeft: 20,
-          borderBottomColor: "grey",
-          borderBottomWidth: StyleSheet.hairlineWidth
-        }}
-      >
-        <Text onPress={() => changeModalVisibility(true)} style={styles.text}>
-          {chooseData}
+    <SafeAreaView>
+      <View style={styleSelectLocation.txtSelect}>
+        <Text
+          onPress={() => changeModalVisibility(true)}
+          style={styleSelectLocation.text}
+        >
+          {chooseData},{chooseCode}
         </Text>
       </View>
       <Modal
@@ -52,24 +50,11 @@ const MySelectLocation = (props) => {
       >
         <ModalPicker
           changeModalVisibility={changeModalVisibility}
-          setData={setData}
+          setCityInitial={setCityInitial}
+          setCode={setCode}
         />
       </Modal>
     </SafeAreaView>
   );
 };
 export default MySelectLocation;
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 15,
-    color: "grey"
-  },
-  touchableOpacity: {
-    alignSelf: "stretch",
-    paddingHorizontal: 20,
-    borderBottomWidth: 1,
-    borderColor: "grey",
-    marginLeft: 20
-  }
-});

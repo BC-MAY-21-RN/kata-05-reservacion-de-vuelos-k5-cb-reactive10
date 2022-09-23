@@ -35,13 +35,11 @@ export default function BookingScreen() {
         <View style={stylesBookingScreen.input}>
           <MySelectLocation />
         </View>
-        <View>
-          <View style={stylesBookingScreen.buttonStyle}>
-            <MyButton
-              text={" Next "}
-              onPress={() => navigation.navigate("Calendars")}
-            />
-          </View>
+        <View style={stylesBookingScreen.buttonStyle}>
+          <MyButton
+            text={" Next "}
+            onPress={() => navigation.navigate("Calendars")}
+          />
         </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>

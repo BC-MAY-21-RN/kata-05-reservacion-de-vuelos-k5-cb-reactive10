@@ -8,13 +8,16 @@ import { Colors } from "../theme/Colors";
 import { AntDesign } from "@expo/vector-icons";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import { stylesLogin } from "../views/style/StyleLogin";
-import { useSelector, useDispatch } from "react-redux";
-import {handlFechaViaje} from "../redux/features/flightsSlice"
+import { useDispatch, useSelector } from "react-redux";
 import ComponentListFlight from "../components/ComponentListFlight";
+import moment from "moment";
+import { useNavigation } from "@react-navigation/native";
+import { handlFechaViaje } from "../redux/features/flightsSlice";
+import IconBack from "../components/IconBack";
 
 export default function CalendarScreen() {
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
   const routeInitial = useSelector(
     (state) => state.stateGlobal.chooseCodeIntial
   );
@@ -26,20 +29,19 @@ export default function CalendarScreen() {
 
   const [day, setDay] = useState("");
   // se guarda el dia seleccionadooooo
-  const fechaSeleccionada = useSelector((state) => state.stateGlobal.fechaViaje);
-
-  console.log(fechaSeleccionada)
 
   let renderArrow = (direction) => {
     if (direction === "left") {
-      return <AntDesign name="left" size={24} color="#7A76D1" />;
+      return <AntDesign name="left" size={24} color={Colors.blue} />;
     } else {
-      return <AntDesign name="right" size={24} color="#7A76D1" />;
+      return <AntDesign name="right" size={24} color={Colors.blue} />;
     }
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ marginTop: 30 }}>
+        <IconBack />
         <ComponentListFlight
           routeInitial={routeInitial}
           cityInitial={cityInitial}
@@ -47,28 +49,26 @@ export default function CalendarScreen() {
           cityFinal={cityFinal}
         />
       </View>
+      <View style={{ marginLeft: 10, marginBottom: 20 }}>
+        <TextBooking titleContent={"Select date"} />
+      </View>
       <Calendar
         style={{
           height: "55%",
-          borderColor: "gray",
-          marginTop: 100
+          borderColor: "gray"
         }}
         theme={{
           textDayFontSize: 16,
           textMonthFontSize: 26,
-          textMonthFontWeight: "500",
-          textDayFontSize: 20
+          textMonthFontWeight: "500"
         }}
-        // cambiar por el dia actual
-        initialDate={"2022-08-17"}
-        monthFormat={'MM dd yyyy'}
-        minDate={"2022-08-17"}
         onDayPress={(day) => {
-          dispatch(handlFechaViaje(day))
-          // console.log("selected day", day);
-
-          //setDay me sirve q el estado le indique q casillero pintar en markedDates
-          setDay(day.dateString);
+          setDay(moment(day).subtract(1, "M").format("YYYY-MM-DD"));
+          dispatch(
+            handlFechaViaje(
+              moment(day).subtract(1, "M").format("MMMM D, YYYY ")
+            )
+          );
         }}
         renderArrow={renderArrow}
         disableAllTouchEventsForDisabledDays={true}
@@ -78,8 +78,8 @@ export default function CalendarScreen() {
             customStyles: {
               container: {
                 backgroundColor: "#7A76D1",
-                height: 37,
-                width: 37
+                height: 33,
+                width: 33
               },
               text: {
                 color: "white",
@@ -89,7 +89,10 @@ export default function CalendarScreen() {
           }
         }}
       />
-      <MyButton text={"Next"} />
+      <MyButton
+        text={"Next"}
+        onPress={() => navigation.navigate("Passenger")}
+      />
     </SafeAreaView>
   );
 }

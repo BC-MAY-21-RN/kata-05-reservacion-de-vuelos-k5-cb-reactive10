@@ -8,13 +8,14 @@ export const stylesBookingScreen = StyleSheet.create({
     height: 40,
     justifyContent: "center",
     alignSelf: "center",
-    marginTop: 280
+    marginTop: "100%",
+    marginBottom: 30
   },
   input: {
     marginTop: 80
   },
   title: {
-    marginTop: 200,
+    marginTop: 50,
     marginLeft: 25
   },
   container: {

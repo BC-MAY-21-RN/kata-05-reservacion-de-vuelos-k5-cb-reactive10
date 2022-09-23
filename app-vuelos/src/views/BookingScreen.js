@@ -22,13 +22,11 @@ const BookingScreen = () => {
         <View style={stylesBookingScreen.input}>
           <MySelectLocation name={"initial"} />
         </View>
-        <View>
-          <View style={stylesBookingScreen.buttonStyle}>
-            <MyButton
-              text={" Next "}
-              onPress={() => navigation.navigate("BookingDestinity")}
-            />
-          </View>
+        <View style={stylesBookingScreen.buttonStyle}>
+          <MyButton
+            text={" Next "}
+            onPress={() => navigation.navigate("BookingDestinity")}
+          />
         </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>

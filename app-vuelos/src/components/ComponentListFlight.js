@@ -14,7 +14,7 @@ const ComponentListFlight = ({
   condition
 }) => {
   return (
-    <>
+    <View style={{ marginLeft: 10 }}>
       <View style={stylesListFlights.citysCode}>
         <Text style={stylesListFlights.routes}>{routeInitial}</Text>
         <MaterialIcons
@@ -31,7 +31,12 @@ const ComponentListFlight = ({
           {cityFinal}
         </Text>
       </View>
-      <View style={[stylesListFlights.info,(condition&&{borderBottomColor: "black", borderBottomWidth: 1})]}>
+      <View
+        style={[
+          stylesListFlights.info,
+          condition && { borderBottomColor: "black", borderBottomWidth: 1 }
+        ]}
+      >
         <Text style={stylesListFlights.infotext}>{date}</Text>
         {passengers && (
           <Text style={[stylesListFlights.infotext, { paddingBottom: 18 }]}>
@@ -39,7 +44,7 @@ const ComponentListFlight = ({
           </Text>
         )}
       </View>
-    </>
+    </View>
   );
 };
 

@@ -66,7 +66,9 @@ export default function CalendarScreen() {
         onDayPress={(day) => {
           dispatch(handlFechaViaje(day))
           // console.log("selected day", day);
-          // setDay(day.dateString);
+
+          //setDay me sirve q el estado le indique q casillero pintar en markedDates
+          setDay(day.dateString);
         }}
         renderArrow={renderArrow}
         disableAllTouchEventsForDisabledDays={true}

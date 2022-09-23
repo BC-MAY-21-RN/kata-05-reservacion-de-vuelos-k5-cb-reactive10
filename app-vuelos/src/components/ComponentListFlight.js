@@ -10,7 +10,8 @@ const ComponentListFlight = ({
   routeInitial,
   routeFinal,
   passengers,
-  date
+  date,
+  condition
 }) => {
   return (
     <>
@@ -30,7 +31,7 @@ const ComponentListFlight = ({
           {cityFinal}
         </Text>
       </View>
-      <View style={stylesListFlights.info}>
+      <View style={[stylesListFlights.info,(condition&&{borderBottomColor: "black", borderBottomWidth: 1})]}>
         <Text style={stylesListFlights.infotext}>{date}</Text>
         {passengers && (
           <Text style={[stylesListFlights.infotext, { paddingBottom: 18 }]}>

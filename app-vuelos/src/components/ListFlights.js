@@ -8,10 +8,10 @@ import ComponentListFlight from "./ComponentListFlight";
 
 const ListFlights = ({ data, scale, opacity }) => {
   return (
-    <GestureHandlerRootView>
-      <Swipeable renderRightActions={swipeRightActions}>
-        <Animated.View style={{ transform: [{ scale }], opacity }}>
-          <ComponentListFlight {...data} />
+    <GestureHandlerRootView >
+      <Swipeable renderRightActions={swipeRightActions} >
+        <Animated.View style={{ transform: [{ scale }], opacity }} >
+          <ComponentListFlight {...data}  condition={true} />
         </Animated.View>
       </Swipeable>
     </GestureHandlerRootView>

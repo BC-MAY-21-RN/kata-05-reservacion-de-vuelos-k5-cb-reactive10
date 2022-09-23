@@ -38,7 +38,7 @@ const MyFlights = ({ navigation }) => {
     <SafeAreaView style={stylesMyFlights.container}>
       <StatusBar style="dark" />
       <Title titleContent={"My Flights"} />
-      <Animated.FlatList
+      <Animated.FlatList 
         data={data}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],

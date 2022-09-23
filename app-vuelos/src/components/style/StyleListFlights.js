@@ -21,8 +21,8 @@ export const stylesListFlights = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginLeft: 10,
-    borderBottomColor: "black",
-    borderBottomWidth: 1
+    // borderBottomColor: "black",
+    // borderBottomWidth: 1
   },
   iconFligth: {
     transform: [{ rotate: "90deg" }],

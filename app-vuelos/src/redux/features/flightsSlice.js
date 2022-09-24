@@ -6,7 +6,8 @@ const initialState = {
   chooseCodeFinal: "",
   cityFinalChoose: "",
   fechaViaje: "",
-  passengers: ""
+  passengers: "",
+  colorBtn: false
 };
 
 export const flightsSlice = createSlice({
@@ -30,6 +31,9 @@ export const flightsSlice = createSlice({
     },
     handlePassengers: (state, action) => {
       state.passengers = action.payload;
+    },
+    handleColor: (state, action) => {
+      state.colorBtn = action.payload;
     }
   }
 });
@@ -40,7 +44,8 @@ export const {
   handleCodeFinal,
   handleCityFinal,
   handlFechaViaje,
-  handlePassengers
+  handlePassengers,
+  handleColor
 } = flightsSlice.actions;
 
 export default flightsSlice.reducer;

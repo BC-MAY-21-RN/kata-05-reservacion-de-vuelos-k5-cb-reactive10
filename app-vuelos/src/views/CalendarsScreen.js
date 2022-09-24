@@ -1,34 +1,37 @@
-import { View, Text, SafeAreaView, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import { View, SafeAreaView, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
 import MyButton from "../components/MyButton";
-import MySelectLocation from "../components/MySelectLocation";
 import TextBooking from "../components/TextBooking";
 import { Colors } from "../theme/Colors";
 
 import { AntDesign } from "@expo/vector-icons";
-import { Calendar, CalendarList, Agenda } from "react-native-calendars";
-import { stylesLogin } from "../views/style/StyleLogin";
+import { Calendar } from "react-native-calendars";
 import { useDispatch, useSelector } from "react-redux";
 import ComponentListFlight from "../components/ComponentListFlight";
 import moment from "moment";
 import { useNavigation } from "@react-navigation/native";
-import { handlFechaViaje } from "../redux/features/flightsSlice";
+import { handlFechaViaje, handleColor } from "../redux/features/flightsSlice";
 import IconBack from "../components/IconBack";
 
 export default function CalendarScreen() {
-  const dispatch = useDispatch();
   const navigation = useNavigation();
-  const routeInitial = useSelector(
-    (state) => state.stateGlobal.chooseCodeIntial
-  );
-  const cityInitial = useSelector(
-    (state) => state.stateGlobal.cityInitialChoose
-  );
-  const cityFinal = useSelector((state) => state.stateGlobal.cityFinalChoose);
-  const routeFinal = useSelector((state) => state.stateGlobal.chooseCodeFinal);
+  const dispatch = useDispatch();
+  const stateApp = useSelector((state) => state.stateGlobal);
+  const routeInitial = useSelector(() => stateApp.chooseCodeIntial);
+  const cityInitial = useSelector(() => stateApp.cityInitialChoose);
+  const cityFinal = useSelector(() => stateApp.cityFinalChoose);
+  const routeFinal = useSelector(() => stateApp.chooseCodeFinal);
 
   const [day, setDay] = useState("");
   // se guarda el dia seleccionadooooo
+
+  useEffect(() => {
+    if (stateApp.fechaViaje !== "") {
+      dispatch(handleColor(true));
+    } else {
+      dispatch(handleColor(false));
+    }
+  }, [stateApp.fechaViaje]);
 
   let renderArrow = (direction) => {
     if (direction === "left") {
@@ -77,7 +80,7 @@ export default function CalendarScreen() {
           [day]: {
             customStyles: {
               container: {
-                backgroundColor: "#7A76D1",
+                backgroundColor: Colors.blue,
                 height: 33,
                 width: 33
               },
@@ -92,6 +95,7 @@ export default function CalendarScreen() {
       <MyButton
         text={"Next"}
         onPress={() => navigation.navigate("Passenger")}
+        btnColor={stateApp.colorBtn}
       />
     </SafeAreaView>
   );

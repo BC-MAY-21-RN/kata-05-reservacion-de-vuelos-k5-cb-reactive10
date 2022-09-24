@@ -1,28 +1,35 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import IconBack from "../components/IconBack";
 import ComponentListFlight from "../components/ComponentListFlight";
 import TextBooking from "../components/TextBooking";
 import SpinPickerPassagers from "../components/SpinPickerPassagers";
 import MyButton from "../components/MyButton";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { handleColor } from "../redux/features/flightsSlice";
 
 const Passenger = ({ navigation }) => {
-  const routeInitial = useSelector(
-    (state) => state.stateGlobal.chooseCodeIntial
-  );
-  const cityInitial = useSelector(
-    (state) => state.stateGlobal.cityInitialChoose
-  );
-  const cityFinal = useSelector((state) => state.stateGlobal.cityFinalChoose);
-  const routeFinal = useSelector((state) => state.stateGlobal.chooseCodeFinal);
-  const fechaViaje = useSelector((state) => state.stateGlobal.fechaViaje);
+  const dispatch = useDispatch();
+  const stateApp = useSelector((state) => state.stateGlobal);
+  const routeInitial = useSelector(() => stateApp.chooseCodeIntial);
+  const cityInitial = useSelector(() => stateApp.cityInitialChoose);
+  const cityFinal = useSelector(() => stateApp.cityFinalChoose);
+  const routeFinal = useSelector(() => stateApp.chooseCodeFinal);
+  const fechaViaje = useSelector(() => stateApp.fechaViaje);
+
+  useEffect(() => {
+    if (stateApp.passengers !== "") {
+      dispatch(handleColor(true));
+    } else {
+      dispatch(handleColor(false));
+    }
+  }, [stateApp.passengers]);
   return (
     <View style={{ flex: 1 }}>
       <View style={{ marginTop: 30 }}>
         <IconBack />
       </View>
-      <View>
+      <View style={{ width: "95%" }}>
         <ComponentListFlight
           routeInitial={routeInitial}
           cityInitial={cityInitial}
@@ -31,7 +38,7 @@ const Passenger = ({ navigation }) => {
           date={fechaViaje}
         />
       </View>
-      <View style={{ marginLeft: 20, marginBottom: 20 }}>
+      <View style={{ marginLeft: 20, marginBottom: 20, marginTop: 40 }}>
         <TextBooking titleContent={"How many"} />
         <TextBooking titleContent={"passengers?"} />
       </View>
@@ -42,6 +49,7 @@ const Passenger = ({ navigation }) => {
         <MyButton
           text={"Next"}
           onPress={() => navigation.navigate("AbstracFligth")}
+          btnColor={stateApp.colorBtn}
         />
       </View>
     </View>
@@ -52,13 +60,10 @@ export default Passenger;
 
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
-    bottom: 45,
+    bottom: 115,
     width: "90%",
     height: 40,
     justifyContent: "center",
-    alignSelf: "center",
-    //marginTop: 200
-    marginBottom: 30
+    alignSelf: "center"
   }
 });

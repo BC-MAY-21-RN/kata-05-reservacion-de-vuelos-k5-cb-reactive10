@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const stylesBookingScreen = StyleSheet.create({
+export const StyleBookingDestinity = StyleSheet.create({
   buttonStyle: {
     position: "relative",
     bottom: 45,
@@ -8,7 +8,7 @@ export const stylesBookingScreen = StyleSheet.create({
     height: 40,
     justifyContent: "center",
     alignSelf: "center",
-    marginTop: "99%",
+    marginTop: "76%",
     marginBottom: 20
   },
   input: {

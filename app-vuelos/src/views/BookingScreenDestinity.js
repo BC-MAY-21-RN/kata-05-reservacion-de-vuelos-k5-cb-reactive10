@@ -6,7 +6,7 @@ import TextBooking from "../components/TextBooking";
 import IconBack from "../components/IconBack";
 import ComponentListFlight from "../components/ComponentListFlight";
 import { useNavigation } from "@react-navigation/native";
-import { stylesBookingScreen } from "./style/stylesBookingScreen";
+import { StyleBookingDestinity } from "./style/StyleBookingDestinity";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useSelector } from "react-redux";
 
@@ -20,28 +20,28 @@ export default function BookingScreen() {
   );
 
   return (
-    <SafeAreaView style={stylesBookingScreen.container}>
-      <KeyboardAwareScrollView>
-        <IconBack />
-        <ComponentListFlight
-          routeInitial={routeInitial}
-          cityInitial={cityInitial}
-        />
-        <View style={stylesBookingScreen.title}>
-          <TextBooking titleContent={"Where will you be"} />
-          <TextBooking titleContent={"flying to?"} />
-        </View>
+    <SafeAreaView style={StyleBookingDestinity.container}>
+      {/* <KeyboardAwareScrollView> */}
+      <IconBack />
+      <ComponentListFlight
+        routeInitial={routeInitial}
+        cityInitial={cityInitial}
+      />
+      <View style={StyleBookingDestinity.title}>
+        <TextBooking titleContent={"Where will you be"} />
+        <TextBooking titleContent={"flying to?"} />
+      </View>
 
-        <View style={stylesBookingScreen.input}>
-          <MySelectLocation />
-        </View>
-      </KeyboardAwareScrollView>
-      <View style={stylesBookingScreen.buttonStyle}>
-          <MyButton
-            text={" Next "}
-            onPress={() => navigation.navigate("Calendars")}
-          />
-        </View>
+      <View style={StyleBookingDestinity.input}>
+        <MySelectLocation />
+      </View>
+      {/* </KeyboardAwareScrollView> */}
+      <View style={StyleBookingDestinity.buttonStyle}>
+        <MyButton
+          text={" Next "}
+          onPress={() => navigation.navigate("Calendars")}
+        />
+      </View>
     </SafeAreaView>
   );
 }

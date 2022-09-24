@@ -40,7 +40,7 @@ export default function CalendarScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ marginTop: 30 }}>
+      <View style={{ marginTop: 30, width: "98%" }}>
         <IconBack />
         <ComponentListFlight
           routeInitial={routeInitial}

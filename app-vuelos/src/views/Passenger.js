@@ -31,14 +31,13 @@ const Passenger = ({ navigation }) => {
           date={fechaViaje}
         />
       </View>
-      <View>
+      <View style={{ marginLeft: 20, marginBottom: 20 }}>
         <TextBooking titleContent={"How many"} />
         <TextBooking titleContent={"passengers?"} />
       </View>
       <View>
         <SpinPickerPassagers />
       </View>
-
       <View style={styles.container}>
         <MyButton
           text={"Next"}
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: "center",
     alignSelf: "center",
-    //marginTop: "100%",
-    marginBottom: 30,
-  },
+    //marginTop: 200
+    marginBottom: 30
+  }
 });

@@ -6,25 +6,18 @@ import MyButton from "./../components/MyButton";
 
 import { useSelector } from "react-redux";
 
-
-
 const AbstracFligth = () => {
-
-
-  const stateApp = useSelector(
-    (state) => state.stateGlobal
-  );
+  const stateApp = useSelector((state) => state.stateGlobal);
   return (
-    <View style={{flex:1}}>
-      <View style={{ marginTop: "50%" }}>
-        <ComponentListFlight 
-         routeInitial={stateApp.chooseCodeIntial}
-         cityInitial={stateApp.cityInitialChoose}
-         routeFinal={stateApp.chooseCodeFinal}
-         cityFinal={stateApp.cityFinalChoose}
-         date={stateApp.fechaViaje}
-         passengers={stateApp.passengers}
-
+    <View style={{ flex: 1 }}>
+      <View style={{ marginTop: "50%", width: "95%" }}>
+        <ComponentListFlight
+          routeInitial={stateApp.chooseCodeIntial}
+          cityInitial={stateApp.cityInitialChoose}
+          routeFinal={stateApp.chooseCodeFinal}
+          cityFinal={stateApp.cityFinalChoose}
+          date={stateApp.fechaViaje}
+          passengers={stateApp.passengers}
         />
       </View>
       <View style={{ marginTop: 25, marginLeft: 25 }}>
@@ -49,6 +42,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     //marginTop: "100%",
-    marginBottom: 30,
-  },
+    marginBottom: 30
+  }
 });

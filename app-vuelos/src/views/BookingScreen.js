@@ -13,16 +13,16 @@ const BookingScreen = () => {
 
   return (
     <SafeAreaView style={stylesBookingScreen.container}>
-      <KeyboardAwareScrollView>
-        <IconBack />
-        <View style={stylesBookingScreen.title}>
-          <TextBooking titleContent={"Where are you"} />
-          <TextBooking titleContent={"now?"} />
-        </View>
-        <View style={[stylesBookingScreen.input,{backgroundColor:'red'}]}>
-          <MySelectLocation name={"initial"} />
-        </View>
-      </KeyboardAwareScrollView>
+      {/* <KeyboardAwareScrollView> */}
+      <IconBack />
+      <View style={stylesBookingScreen.title}>
+        <TextBooking titleContent={"Where are you"} />
+        <TextBooking titleContent={"now?"} />
+      </View>
+      <View style={stylesBookingScreen.input}>
+        <MySelectLocation name={"initial"} />
+      </View>
+      {/* </KeyboardAwareScrollView> */}
       <View style={stylesBookingScreen.buttonStyle}>
         <MyButton
           text={" Next "}

@@ -15,7 +15,7 @@ const AbstracFligth = () => {
     (state) => state.stateGlobal
   );
   return (
-    <View>
+    <View style={{flex:1}}>
       <View style={{ marginTop: "50%" }}>
         <ComponentListFlight 
          routeInitial={stateApp.chooseCodeIntial}
@@ -27,11 +27,11 @@ const AbstracFligth = () => {
 
         />
       </View>
-      <View style={{ marginTop: 25 }}>
+      <View style={{ marginTop: 25, marginLeft: 25 }}>
         <TextBooking titleContent={"Your request"} />
         <TextBooking titleContent={"was received"} />
       </View>
-      <View style={{ marginTop: 280 }}>
+      <View style={styles.container}>
         <MyButton text={"Finish"} />
       </View>
     </View>
@@ -40,4 +40,15 @@ const AbstracFligth = () => {
 
 export default AbstracFligth;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    position: "relative",
+    bottom: -160,
+    width: "90%",
+    height: 40,
+    justifyContent: "center",
+    alignSelf: "center",
+    //marginTop: "100%",
+    marginBottom: 30,
+  },
+});

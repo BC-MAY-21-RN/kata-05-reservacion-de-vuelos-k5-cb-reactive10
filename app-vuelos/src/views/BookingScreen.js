@@ -19,16 +19,16 @@ const BookingScreen = () => {
           <TextBooking titleContent={"Where are you"} />
           <TextBooking titleContent={"now?"} />
         </View>
-        <View style={stylesBookingScreen.input}>
+        <View style={[stylesBookingScreen.input,{backgroundColor:'red'}]}>
           <MySelectLocation name={"initial"} />
         </View>
-        <View style={stylesBookingScreen.buttonStyle}>
-          <MyButton
-            text={" Next "}
-            onPress={() => navigation.navigate("BookingDestinity")}
-          />
-        </View>
       </KeyboardAwareScrollView>
+      <View style={stylesBookingScreen.buttonStyle}>
+        <MyButton
+          text={" Next "}
+          onPress={() => navigation.navigate("BookingDestinity")}
+        />
+      </View>
     </SafeAreaView>
   );
 };

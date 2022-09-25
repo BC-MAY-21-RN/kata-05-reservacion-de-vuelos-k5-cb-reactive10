@@ -10,7 +10,6 @@ export const stylesHelpers = StyleSheet.create({
     color: "white",
     paddingHorizontal: 19,
     fontWeight: "600",
-    transform: [{ scale }]
   },
   containerUpdate: {
     backgroundColor: Colors.blue,

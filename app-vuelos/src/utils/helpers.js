@@ -15,7 +15,7 @@ export const swipeRightActions = (progress, dragX) => {
         onPress={() => alert("Delete Fligth")}
         style={stylesHelpers.containerDelete}
       >
-        <Animated.Text style={stylesHelpers.animatedText}>
+        <Animated.Text style={[stylesHelpers.animatedText, { transform: [{ scale }]}]}>
           <MaterialIcons name="delete-sweep" size={24} color={Colors.white} />
         </Animated.Text>
       </TouchableOpacity>
@@ -23,7 +23,7 @@ export const swipeRightActions = (progress, dragX) => {
         onPress={() => alert("Update Fligth")}
         style={stylesHelpers.containerUpdate}
       >
-        <Animated.Text style={stylesHelpers.animatedText}>
+        <Animated.Text style={[stylesHelpers.animatedText, { transform: [{ scale }]}]}>
           <MaterialIcons name="edit" size={24} color={Colors.white} />
         </Animated.Text>
       </TouchableOpacity>

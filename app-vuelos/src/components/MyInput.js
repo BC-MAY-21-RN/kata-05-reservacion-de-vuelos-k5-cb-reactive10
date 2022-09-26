@@ -23,7 +23,7 @@ const MyInput = ({
     <View>
       <View style={stylesMyInput.viewStyle}>
         <Text style={stylesMyInput.textEmailP}>{label}</Text>
-        <Text style={stylesMyInput.errorMensage}>{error}</Text>
+        {error && <Text style={stylesMyInput.errorMensage}>{error}</Text>}
       </View>
       <View style={stylesMyInput.container}>
         <TextInput

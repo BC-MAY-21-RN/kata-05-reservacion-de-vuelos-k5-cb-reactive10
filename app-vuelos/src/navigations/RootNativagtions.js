@@ -1,22 +1,20 @@
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 //import Views
+<<<<<<< HEAD
 import LoginScreen from "./../views/LoginScreen";
 import SignUp from "./../views/SignUp";
 import HomePrueba from "./../views/Homeprueba"
 
+=======
+>>>>>>> master
 import { NavigationContainer } from "@react-navigation/native";
-
-//Creamos el stack
-const Stack = createNativeStackNavigator();
-
-const myConfigHeader = {
-  headerShown: false
-};
+import MyStack from "./MyStack";
+import { Provider } from "react-redux";
+import { store } from "../redux/store/store";
 
 const RootNativagtions = () => {
   return (
+<<<<<<< HEAD
     <NavigationContainer>
       <Stack.Navigator screenOptions={myConfigHeader}>
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
@@ -25,6 +23,13 @@ const RootNativagtions = () => {
 
       </Stack.Navigator>
     </NavigationContainer>
+=======
+    <Provider store={store}>
+      <NavigationContainer>
+        <MyStack />
+      </NavigationContainer>
+    </Provider>
+>>>>>>> master
   );
 };
 

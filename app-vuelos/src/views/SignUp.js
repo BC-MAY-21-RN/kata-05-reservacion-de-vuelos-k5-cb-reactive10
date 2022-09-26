@@ -13,7 +13,6 @@ import { stylesSignUp } from "./style/StyleSigUp";
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import Title from "../components/Title";
-import LoginScreen from "./LoginScreen";
 
 // firebase 
 import {handleCreateAcount} from "../../db/auth-firebase"
@@ -81,22 +80,26 @@ const SignUp = () => {
     setTimeout(() => {
       try {
         setLoading(false);
+<<<<<<< HEAD
         //navigation.navigate('LoginScreen');
         alert("GOOOO GOOOOOO!!!!");
         handleCreateAcount(inputs.email,inputs.password,inputs.name)
 
+=======
+        alert("GOOO");
+>>>>>>> master
       } catch (error) {
         alert("Error", "Something went wrong");
       }
-    }, 1500);
+    }, 500);
   };
 
   //functions
-  const handleOnchange = (text, input) => {
-    setInputs((prevState) => ({ ...prevState, [input]: text }));
+  const handleOnchange = (text, inputs) => {
+    setInputs((prevState) => ({ ...prevState, [inputs]: text }));
   };
-  const handleError = (error, input) => {
-    setErrors((prevState) => ({ ...prevState, [input]: error }));
+  const handleError = (errors, inputs) => {
+    setErrors((prevState) => ({ ...prevState, [inputs]: errors }));
   };
 
 
@@ -111,7 +114,7 @@ const SignUp = () => {
         <MyInput
           label={"Firts Name"}
           keyboardType="default"
-          onChangeText={(text) => handleOnchange(text, "name")}
+          onChangeText={(text) => handleOnchange(text)}
           error={errors.name}
           onFocus={() => handleError(null, "name")}
         />
@@ -191,7 +194,7 @@ const SignUp = () => {
         >
           Already have an account?{"  "}
           <Text
-            onPress={() => navigation.navigate(LoginScreen)}
+            onPress={() => navigation.navigate("LoginScreen")}
             style={{
               textDecorationLine: "underline",
               color: Colors.blue

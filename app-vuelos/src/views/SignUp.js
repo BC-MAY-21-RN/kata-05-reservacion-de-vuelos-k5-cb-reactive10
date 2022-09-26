@@ -14,11 +14,8 @@ import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import Title from "../components/Title";
 
-// firebase 
-import {handleCreateAcount} from "../../db/auth-firebase"
-
-
-
+// firebase
+import { handleCreateAcount } from "../firebase/auth-firebase";
 
 const SignUp = () => {
   const navigation = useNavigation();
@@ -80,14 +77,10 @@ const SignUp = () => {
     setTimeout(() => {
       try {
         setLoading(false);
-<<<<<<< HEAD
         //navigation.navigate('LoginScreen');
+        handleCreateAcount(inputs.email, inputs.password, inputs.name);
         alert("GOOOO GOOOOOO!!!!");
-        handleCreateAcount(inputs.email,inputs.password,inputs.name)
-
-=======
         alert("GOOO");
->>>>>>> master
       } catch (error) {
         alert("Error", "Something went wrong");
       }
@@ -102,10 +95,6 @@ const SignUp = () => {
     setErrors((prevState) => ({ ...prevState, [inputs]: errors }));
   };
 
-
-
-
-
   return (
     <SafeAreaView style={stylesSignUp.container}>
       <StatusBar style="dark" />
@@ -114,7 +103,7 @@ const SignUp = () => {
         <MyInput
           label={"Firts Name"}
           keyboardType="default"
-          onChangeText={(text) => handleOnchange(text)}
+          onChangeText={(text) => handleOnchange(text, "name")}
           error={errors.name}
           onFocus={() => handleError(null, "name")}
         />

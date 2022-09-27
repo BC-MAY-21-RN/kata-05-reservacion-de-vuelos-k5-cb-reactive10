@@ -10,7 +10,7 @@ import BookingScreenDestinity from "../views/BookingScreenDestinity";
 import CalendarScreen from "../views/CalendarsScreen";
 import Passenger from "./../views/Passenger";
 import AbstracFligth from "../views/AbstracFligth";
-import HomePrueba from "./../views/HomePrueba";
+import HomePrueba from "../views/HomePrueba";
 
 //configStack
 import { myConfigHeader } from "../utils/helpers";

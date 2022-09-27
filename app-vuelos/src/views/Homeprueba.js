@@ -39,7 +39,7 @@ const HomePrueba = () => {
   // });
   // console.log(countriesData[0].data.countries)
 
-  // }
+  //push }
 
   async function getCities() {
     const flights = query(

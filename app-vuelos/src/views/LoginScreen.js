@@ -42,6 +42,7 @@ const LoginScreen = () => {
       navigation.navigate("HomePrueba");
     }
   }, [loginState]);
+  
 
   const validate = () => {
     Keyboard.dismiss();

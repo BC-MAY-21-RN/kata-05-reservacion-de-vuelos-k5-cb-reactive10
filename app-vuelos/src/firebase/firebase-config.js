@@ -5,7 +5,7 @@ import {
   PROJECT_ID,
   STORAGE_BUCKET,
   MESSAGING_SENDERID,
-  APP_ID,
+  APP_ID
 } from "@env";
 
 export const firebaseConfig = {
@@ -14,7 +14,7 @@ export const firebaseConfig = {
   projectId: PROJECT_ID,
   storageBucket: STORAGE_BUCKET,
   messagingSenderId: MESSAGING_SENDERID,
-  appId: APP_ID,
+  appId: APP_ID
 };
 
 export const app = initializeApp(firebaseConfig);

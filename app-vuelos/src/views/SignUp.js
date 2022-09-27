@@ -45,8 +45,7 @@ const SignUp = () => {
 
     if (!inputs.name) {
       handleError("*Please input fullname", "name");
-      isValid = false;
-    }
+      isValid = true};
 
     if (!inputs.password) {
       handleError("*Please input password", "password");
@@ -70,7 +69,7 @@ const SignUp = () => {
     if (isValid) {
       register();
     }
-  };
+  }
 
   const register = () => {
     setLoading(true);
@@ -194,7 +193,7 @@ const SignUp = () => {
         </Text>
       </KeyboardAwareScrollView>
     </SafeAreaView>
-  );
-};
+  )
+  }
 
 export default SignUp;

@@ -8,13 +8,14 @@ import {
   collection,
   getDocs,
   Timestamp,
-  query
+  query,
+  addDoc,
 } from "firebase/firestore";
 import { auth, db } from "../firebase/auth-firebase";
 
 const HomePrueba = () => {
   const [data, setData] = useState({});
-  console.log("datos", data);
+  //console.log("datos", data[0].data.llegada);
 
   const user = auth;
   console.log("user", user);
@@ -23,7 +24,7 @@ const HomePrueba = () => {
 
   useEffect(() => {
     getCities();
-    // addFlights()
+    //addFlights()
     // getCountries()
   }, []);
 
@@ -52,31 +53,32 @@ const HomePrueba = () => {
     queryFlights.forEach((doc) => {
       flightData.push({ id: doc.id, data: doc.data() });
     });
-    console.log(flightData);
+    console.log("Hola: ", flightData);
 
     setData(flightData);
   }
 
   // --------------- ADD DATA ----------------//
-  // const docData = {
-  // llegada: { pais:"PAR", codigo: "MEX"} ,
-  // origen: { pais:"URUGUAY", codigo: "CHI"} ,
+  const docData = {
+    llegada: { pais: "Texas", codigo: "USA" },
+    origen: { pais: "Mexico", codigo: "MEX" },
 
-  // pasajeros: 3,
-  // fecha: Timestamp.fromDate(new Date("December 2, 2022")),
-  // email: user.currentUser.email
-
-  // }
-
-  // async function addFlights (){
-  // await addDoc(collection(db, "flights"), docData);
-  // }
+    pasajeros: 3,
+    fecha: Timestamp.fromDate(new Date("December 2, 2022")),
+    email: user.currentUser.email,
+  };
+  async function addFlights() {
+    await addDoc(collection(db, "flights"), docData);
+  }
   //----------------------------------------------//
 
   return (
     <SafeAreaView style={stylesLogin.container}>
       <Text style={{ color: "white", fontSize: 50 }}>
         {user.currentUser?.email}
+      </Text>
+      <Text style={{ color: "white", fontSize: 50 }}>
+        {data[0].data.llegada.pais}
       </Text>
     </SafeAreaView>
   );

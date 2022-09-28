@@ -40,7 +40,7 @@ const MyFlights = ({ navigation }) => {
     queryFlights.forEach((doc) => {
       flightData.push({ id: doc.id, data: doc.data() });
     });
-    //console.log("Hola: ", flightData);
+    console.log("Hola: ", flightData);
 
     setData(flightData);
     // data.map((listData) => setDataList(listData.data));

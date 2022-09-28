@@ -4,52 +4,46 @@ import MyButton from "../components/MyButton";
 import MySelectLocation from "../components/MySelectLocation";
 import TextBooking from "../components/TextBooking";
 import IconBack from "../components/IconBack";
-import ComponentListFlight from "../components/ComponentListFlight";
 import { useNavigation } from "@react-navigation/native";
-import { StyleBookingDestinity } from "./style/StyleBookingDestinity";
+import { stylesBookingScreen } from "./style/stylesBookingScreen";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useSelector, useDispatch } from "react-redux";
 import { handleColor } from "../redux/features/flightsSlice";
 
-export default function BookingScreen() {
+const BookingScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const stateApp = useSelector((state) => state.stateGlobal);
-  const routeInitial = useSelector(() => stateApp.chooseCodeIntial);
-  const cityInitial = useSelector(() => stateApp.cityInitialChoose);
 
-  useEffect(() => {
-    if (stateApp.chooseCodeFinal !== "") {
-      dispatch(handleColor(true));
-    } else {
-      dispatch(handleColor(false));
-    }
-  }, [stateApp.chooseCodeFinal]);
+  // useEffect(() => {
+  //   if (stateApp.cityInitialChoose !== "") {
+  //     dispatch(handleColor(true));
+  //   } else {
+  //     dispatch(handleColor(false));
+  //   }
+  // }, [stateApp.cityInitialChoose]);
 
   return (
-    <SafeAreaView style={StyleBookingDestinity.container}>
+    <SafeAreaView style={stylesBookingScreen.container}>
       {/* <KeyboardAwareScrollView> */}
       <IconBack />
-      <ComponentListFlight
-        routeInitial={routeInitial}
-        cityInitial={cityInitial}
-      />
-      <View style={StyleBookingDestinity.title}>
-        <TextBooking titleContent={"Where will you be"} />
-        <TextBooking titleContent={"flying to?"} />
+      <View style={stylesBookingScreen.title}>
+        <TextBooking titleContent={"Where are you"} />
+        <TextBooking titleContent={"now?"} />
       </View>
-
-      <View style={StyleBookingDestinity.input}>
-        <MySelectLocation />
+      <View style={stylesBookingScreen.input}>
+        <MySelectLocation name={"initial"} />
       </View>
       {/* </KeyboardAwareScrollView> */}
-      <View style={StyleBookingDestinity.buttonStyle}>
+      <View style={stylesBookingScreen.buttonStyle}>
         <MyButton
           text={" Next "}
-          onPress={() => navigation.navigate("Calendars")}
+          onPress={() => navigation.navigate("BookingDestinity")}
           btnColor={stateApp.colorBtn}
         />
       </View>
     </SafeAreaView>
   );
-}
+};
+
+export default BookingScreen;

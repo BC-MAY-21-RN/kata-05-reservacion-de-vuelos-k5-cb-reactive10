@@ -9,7 +9,7 @@ import { handleColor } from "../redux/features/flightsSlice";
 const AbstracFligth = () => {
   const dispatch = useDispatch();
   const stateApp = useSelector((state) => state.stateGlobal);
-
+  //console.log("Estado Global Vuelos =>", stateApp);
   useEffect(() => {
     if (stateApp.passengers !== "" && stateApp.chooseCodeIntial !== "") {
       dispatch(handleColor(true));

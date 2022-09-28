@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import {
   Image,
   Text,
@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   TextInput,
   SafeAreaView,
-  Keyboard
+  Keyboard,
+  ActivityIndicator
 } from "react-native";
 import { BlurView } from "expo-blur";
 import LottieView from "lottie-react-native";
@@ -18,12 +19,14 @@ import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import { stylesLogin } from "../views/style/StyleLogin";
 import { useNavigation } from "@react-navigation/native";
+import { LogBox } from "react-native";
 //firebase
 import { signInAcount } from "../firebase/auth-firebase";
+import Loader from "./Loader";
 
 const uri =
   "https://images.unsplash.com/photo-1527517928481-bcf8d6534de0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGF2aWFjaW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
-
+LogBox.ignoreLogs(["AsyncStorage"]);
 const LoginScreen = () => {
   const navigation = useNavigation();
   const [inputs, setInputs] = useState({
@@ -35,14 +38,16 @@ const LoginScreen = () => {
   const [errors, setErrors] = useState({});
   const [showPassword, setshowPassword] = useState(false);
   const [loginState, setLoginState] = useState(false);
+  const [loading, setLoading] = React.useState(false);
   console.log("resultado de login", loginState);
 
   useEffect(() => {
     if (loginState) {
-      navigation.navigate("HomePrueba");
+      {
+        navigation.navigate("Fligths");
+      }
     }
   }, [loginState]);
-  
 
   const validate = () => {
     Keyboard.dismiss();
@@ -73,9 +78,21 @@ const LoginScreen = () => {
 
     if (isValid) {
       // register();
-      signInAcount(inputs.email, inputs.password, setLoginState);
-      alert("user Loggin");
+      login();
     }
+  };
+
+  const login = () => {
+    setLoading(true);
+    setTimeout(async () => {
+      // <Suspense>
+      //   <ActivityIndicator size="large" color="#00ff00" />;
+      // </Suspense>;
+      //let userData = await AsyncStorage.getItem('userData');
+      signInAcount(inputs.email, inputs.password, setLoginState);
+      //alert("user Loggin");
+      setLoading(false);
+    }, 500);
   };
 
   //functions

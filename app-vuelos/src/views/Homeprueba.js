@@ -9,7 +9,7 @@ import {
   getDocs,
   Timestamp,
   query,
-  addDoc,
+  addDoc
 } from "firebase/firestore";
 import { auth, db } from "../firebase/auth-firebase";
 
@@ -18,7 +18,7 @@ const HomePrueba = () => {
   //console.log("datos", data[0].data.llegada);
 
   const user = auth;
-  console.log("user", user);
+  console.log("user =>", user);
 
   // console.log("correo", user.currentUser?.email);
 
@@ -53,19 +53,23 @@ const HomePrueba = () => {
     queryFlights.forEach((doc) => {
       flightData.push({ id: doc.id, data: doc.data() });
     });
-    console.log("Hola: ", flightData);
+    //console.log("Hola: ", flightData);
 
     setData(flightData);
+
+    data.map((listData) => console.log("Datos: =>", listData.data.fecha));
+    //const {fecha}= listData.
   }
 
   // --------------- ADD DATA ----------------//
   const docData = {
-    llegada: { pais: "Texas", codigo: "USA" },
-    origen: { pais: "Mexico", codigo: "MEX" },
-
-    pasajeros: 3,
-    fecha: Timestamp.fromDate(new Date("December 2, 2022")),
-    email: user.currentUser.email,
+    routeInitial: "AXM",
+    routeFinal: "BOG",
+    cityInitial: "Armenia",
+    cityFinal: "Bogotá",
+    date: "Diciembre 23, 2020",
+    passengers: 2,
+    email: user.currentUser.email
   };
   async function addFlights() {
     await addDoc(collection(db, "flights"), docData);
@@ -77,9 +81,9 @@ const HomePrueba = () => {
       <Text style={{ color: "white", fontSize: 50 }}>
         {user.currentUser?.email}
       </Text>
-      <Text style={{ color: "white", fontSize: 50 }}>
+      {/* <Text style={{ color: "white", fontSize: 50 }}>
         {data[0].data.llegada.pais}
-      </Text>
+      </Text> */}
     </SafeAreaView>
   );
 };

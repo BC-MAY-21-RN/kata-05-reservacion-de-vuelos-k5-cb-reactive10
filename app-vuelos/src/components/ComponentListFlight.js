@@ -4,15 +4,10 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { stylesListFlights } from "./style/StyleListFlights";
 import { Colors } from "../theme/Colors";
 
-const ComponentListFlight = ({
-  cityInitial,
-  cityFinal,
-  routeInitial,
-  routeFinal,
-  passengers,
-  date,
-  condition
-}) => {
+const ComponentListFlight = ({ data, condition }) => {
+  const { cityInitial, cityFinal, routeInitial, routeFinal, passengers, date } =
+    data;
+  console.log("Component List Fligth => ", date);
   return (
     <View style={{ marginLeft: 10 }}>
       <View style={stylesListFlights.citysCode}>

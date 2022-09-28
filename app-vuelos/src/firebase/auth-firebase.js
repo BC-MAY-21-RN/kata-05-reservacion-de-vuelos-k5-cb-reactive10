@@ -44,7 +44,7 @@ export function handleCreateAcount(email, password, name) {
 export function signInAcount(email, password, setLoginState) {
   signInWithEmailAndPassword(auth, email, password)
     .then((result) => {
-      console.log("loginnnnnnnnnnnnnnnnn");
+      console.log("funcion SingIn =>");
       const user = result.user;
       console.log(user.email);
       // navigation.navigate("HomePrueba")

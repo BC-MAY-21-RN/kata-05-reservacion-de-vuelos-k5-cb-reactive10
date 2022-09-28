@@ -11,8 +11,8 @@ import {
 } from "../redux/features/flightsSlice";
 
 const MySelectLocation = ({ name }) => {
-  const location2 = useSelector((state) => state.stateGlobal.cityFinalChoose);
-  const code2 = useSelector((state) => state.stateGlobal.chooseCodeFinal);
+  const location1 = useSelector((state) => state.stateGlobal.cityInitialChoose);
+  // const code2 = useSelector((state) => state.stateGlobal.chooseCodeFinal);
   //REDUX Dispatch
   const dispatch = useDispatch();
 
@@ -38,6 +38,7 @@ const MySelectLocation = ({ name }) => {
     setChooseData(cityInitial);
     dispatch(handleCityInitial(cityInitial));
   };
+  //console.log("DATAPICKER MYSELEC initial,=>", location1);
 
   //actualizar estado redux
   const setCode2 = (code) => {

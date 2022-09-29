@@ -12,9 +12,10 @@ import {
   where,
   collection,
   getDocs,
-  Timestamp,
   query,
-  addDoc
+  orderBy,
+  deleteDoc,
+  doc
 } from "firebase/firestore";
 import { db, auth } from "../firebase/auth-firebase";
 const user = auth;
@@ -25,29 +26,25 @@ const ITEM_SIZE = 70 + SPACING * 3;
 
 const MyFlights = ({ navigation }) => {
   const [data, setData] = useState({});
-  const [dataList, setDataList] = useState({});
+  const [refresh, setRefresh] = useState(false);
 
   //function firebase
-  async function getCities() {
+  async function loadData() {
+    const collectionRef = collection(db, "flights");
     const flights = query(
-      collection(db, "flights"),
+      collectionRef,
       where("email", "==", `${user.currentUser.email}`)
     );
     const queryFlights = await getDocs(flights);
-
     let flightData = [];
-
     queryFlights.forEach((doc) => {
       flightData.push({ id: doc.id, data: doc.data() });
     });
-    // console.log("Hola: ", flightData);
-
     setData(flightData);
-    // data.map((listData) => setDataList(listData.data));
-    // console.log("=> ", dataList);
   }
+
   useEffect(() => {
-    getCities();
+    loadData();
   }, []);
 
   const listData = ({ item, index }) => {
@@ -72,6 +69,14 @@ const MyFlights = ({ navigation }) => {
   };
   const scrollY = useRef(new Animated.Value(0)).current;
 
+  const pullMe = () => {
+    setRefresh(true);
+    setTimeout(() => {
+      setRefresh(false);
+      loadData();
+    }, 1500);
+  };
+
   return (
     <SafeAreaView style={stylesMyFlights.container}>
       <StatusBar style="dark" />
@@ -84,6 +89,8 @@ const MyFlights = ({ navigation }) => {
         )}
         keyExtractor={(item) => item.id}
         renderItem={listData}
+        refreshing={refresh}
+        onRefresh={() => pullMe()}
       />
       <FloatingActionButton navigation={navigation} />
     </SafeAreaView>

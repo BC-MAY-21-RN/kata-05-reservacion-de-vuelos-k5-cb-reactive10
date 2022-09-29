@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 import React, { useEffect } from "react";
 import ComponentListFlight from "./../components/ComponentListFlight";
 import TextBooking from "./../components/TextBooking";
@@ -8,19 +8,11 @@ import { handleColor } from "../redux/features/flightsSlice";
 
 //firebase
 import { db, auth } from "../firebase/auth-firebase";
-import {
-  where,
-  collection,
-  getDocs,
-  Timestamp,
-  query,
-  addDoc
-} from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 
 const AbstracFligth = ({ navigation }) => {
   const dispatch = useDispatch();
   const stateApp = useSelector((state) => state.stateGlobal);
-  console.log("Estado Global Vuelos =>", stateApp);
   useEffect(() => {
     if (stateApp.passengers !== "" && stateApp.chooseCodeIntial !== "") {
       dispatch(handleColor(true));
@@ -30,15 +22,6 @@ const AbstracFligth = ({ navigation }) => {
   }, [stateApp.passengers]);
 
   const user = auth;
-  // const docData = {
-  //   routeInitial: "AXM",
-  //   routeFinal: "BOG",
-  //   cityInitial: "Armenia",
-  //   cityFinal: "Bogotá",
-  //   date: "Diciembre 23, 2020",
-  //   passengers: 2,
-  //   email: user.currentUser.email
-  // };
 
   const docData = {
     routeInitial: stateApp.chooseCodeIntial,
@@ -47,10 +30,10 @@ const AbstracFligth = ({ navigation }) => {
     cityFinal: stateApp.cityFinalChoose,
     date: stateApp.fechaViaje,
     passengers: stateApp.passengers,
-    email: user.currentUser.email
+    email: user.currentUser.email,
+    createdAt: new Date()
   };
   async function addFlights() {
-    //console.log("PRESS ADDFLIGTH");
     const response = await addDoc(collection(db, "flights"), docData);
     navigation.navigate("Fligths");
   }

@@ -47,7 +47,7 @@ export default function BookingScreen() {
         <MyButton
           text={" Next "}
           onPress={() => navigation.navigate("Calendars")}
-          // btnColor={stateApp.colorBtn}
+          btnColor={stateApp.colorBtn}
         />
       </View>
     </SafeAreaView>

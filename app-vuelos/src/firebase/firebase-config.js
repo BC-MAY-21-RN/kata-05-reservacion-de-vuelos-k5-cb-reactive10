@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 import {
   APP_API_KEY,
   AUTH_DOMAIN,
@@ -17,4 +18,5 @@ export const firebaseConfig = {
   appId: APP_ID
 };
 
-export const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
+export const database = getFirestore();

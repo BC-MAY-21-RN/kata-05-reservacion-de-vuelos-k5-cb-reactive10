@@ -85,12 +85,7 @@ const LoginScreen = () => {
   const login = () => {
     setLoading(true);
     setTimeout(async () => {
-      // <Suspense>
-      //   <ActivityIndicator size="large" color="#00ff00" />;
-      // </Suspense>;
-      //let userData = await AsyncStorage.getItem('userData');
       signInAcount(inputs.email, inputs.password, setLoginState);
-      //alert("user Loggin");
       setLoading(false);
     }, 500);
   };
@@ -167,13 +162,6 @@ const LoginScreen = () => {
                   style={stylesLogin.textStyles}
                 >
                   Register
-                </Text>
-
-                <Text
-                  onPress={() => navigation.navigate("Fligths")}
-                  style={stylesLogin.textStyles}
-                >
-                  MyFlights
                 </Text>
               </View>
             </View>

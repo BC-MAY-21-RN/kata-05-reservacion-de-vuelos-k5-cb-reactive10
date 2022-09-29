@@ -43,7 +43,7 @@ const SpinPickerPassagers = () => {
         style={{
           position: "absolute",
           marginTop: 75,
-          marginLeft: 110
+          marginLeft: 140
         }}
       >
         <Ionicons name="caret-forward" size={24} color={Colors.blue} />
@@ -52,7 +52,7 @@ const SpinPickerPassagers = () => {
         style={{
           position: "absolute",
           marginTop: 75,
-          marginLeft: 260
+          marginLeft: 250
         }}
       >
         <Ionicons name="caret-back" size={24} color={Colors.blue} />

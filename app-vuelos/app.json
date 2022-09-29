@@ -24,6 +24,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package":"com.example.app-vuelos",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

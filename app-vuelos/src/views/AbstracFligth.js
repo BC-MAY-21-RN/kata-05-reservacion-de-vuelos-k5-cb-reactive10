@@ -20,7 +20,7 @@ import {
 const AbstracFligth = ({ navigation }) => {
   const dispatch = useDispatch();
   const stateApp = useSelector((state) => state.stateGlobal);
-  //console.log("Estado Global Vuelos =>", stateApp);
+  console.log("Estado Global Vuelos =>", stateApp);
   useEffect(() => {
     if (stateApp.passengers !== "" && stateApp.chooseCodeIntial !== "") {
       dispatch(handleColor(true));
@@ -43,18 +43,16 @@ const AbstracFligth = ({ navigation }) => {
   const docData = {
     routeInitial: stateApp.chooseCodeIntial,
     routeFinal: stateApp.chooseCodeFinal,
-    cityInitial: stateApp.cityInitialChoos,
+    cityInitial: stateApp.cityInitialChoose,
     cityFinal: stateApp.cityFinalChoose,
     date: stateApp.fechaViaje,
     passengers: stateApp.passengers,
     email: user.currentUser.email
   };
-
   async function addFlights() {
     //console.log("PRESS ADDFLIGTH");
     const response = await addDoc(collection(db, "flights"), docData);
-    console.log("==>", response);
-    navigation.navigatee("Fligths");
+    navigation.navigate("Fligths");
   }
 
   return (

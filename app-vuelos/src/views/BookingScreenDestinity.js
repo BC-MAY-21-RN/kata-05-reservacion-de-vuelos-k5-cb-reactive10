@@ -14,29 +14,27 @@ import { handleColor } from "../redux/features/flightsSlice";
 export default function BookingScreen() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  // const stateApp = useSelector((state) => state.stateGlobal);
-  
-  const routeInitial = useSelector((state) => state.stateGlobal.chooseCodeIntial);
-  const cityInitial = useSelector((state) => state.stateGlobal.cityInitialChoose);
-console.log("rutaInicial",routeInitial)
-console.log("cityInitial",cityInitial)
-  // useEffect(() => {
-  //   if (stateApp.chooseCodeFinal !== "") {
-  //     dispatch(handleColor(true));
-  //   } else {
-  //     dispatch(handleColor(false));
-  //   }
-  // }, [stateApp.chooseCodeFinal]);
+  const stateApp = useSelector((state) => state.stateGlobal);
+
+  const routeInitial = useSelector(() => stateApp.chooseCodeIntial);
+  const cityInitial = useSelector(() => stateApp.cityInitialChoose);
+
+  useEffect(() => {
+    if (stateApp.chooseCodeFinal !== "") {
+      dispatch(handleColor(true));
+    } else {
+      dispatch(handleColor(false));
+    }
+  }, [stateApp.chooseCodeFinal]);
 
   return (
     <SafeAreaView style={StyleBookingDestinity.container}>
-     
-       <IconBack />
+      <IconBack />
       <ComponentListFlight
         routeInitial={routeInitial}
-        // cityInitial={cityInitial}
+        cityInitial={cityInitial}
       />
-      
+
       <View style={StyleBookingDestinity.title}>
         <TextBooking titleContent={"Where will you be"} />
         <TextBooking titleContent={"flying to?"} />
@@ -51,7 +49,7 @@ console.log("cityInitial",cityInitial)
           onPress={() => navigation.navigate("Calendars")}
           // btnColor={stateApp.colorBtn}
         />
-      </View> 
+      </View>
     </SafeAreaView>
   );
 }

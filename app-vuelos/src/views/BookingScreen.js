@@ -15,13 +15,13 @@ const BookingScreen = () => {
   const dispatch = useDispatch();
   const stateApp = useSelector((state) => state.stateGlobal);
 
-  // useEffect(() => {
-  //   if (stateApp.cityInitialChoose !== "") {
-  //     dispatch(handleColor(true));
-  //   } else {
-  //     dispatch(handleColor(false));
-  //   }
-  // }, [stateApp.cityInitialChoose]);
+  useEffect(() => {
+    if (stateApp.cityInitialChoose !== "") {
+      dispatch(handleColor(true));
+    } else {
+      dispatch(handleColor(false));
+    }
+  }, [stateApp.cityInitialChoose]);
 
   return (
     <SafeAreaView style={stylesBookingScreen.container}>

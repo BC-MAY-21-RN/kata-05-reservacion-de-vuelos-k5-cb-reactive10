@@ -7,6 +7,10 @@ import { swipeRightActions } from "../utils/helpers";
 import ComponentListFlight from "./ComponentListFlight";
 
 const ListFlights = ({ data, scale, opacity }) => {
+  // console.log("LF=>", data);
+  // let { cityInitial, cityFinal, routeInitial, routeFinal, passengers, date } =
+  //   data;
+  // console.log("===>", cityFinal);
   return (
     <GestureHandlerRootView>
       <Swipeable renderRightActions={swipeRightActions}>

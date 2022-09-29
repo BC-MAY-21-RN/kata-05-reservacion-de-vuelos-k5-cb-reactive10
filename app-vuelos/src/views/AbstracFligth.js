@@ -6,7 +6,18 @@ import MyButton from "./../components/MyButton";
 import { useSelector, useDispatch } from "react-redux";
 import { handleColor } from "../redux/features/flightsSlice";
 
-const AbstracFligth = () => {
+//firebase
+import { db, auth } from "../firebase/auth-firebase";
+import {
+  where,
+  collection,
+  getDocs,
+  Timestamp,
+  query,
+  addDoc
+} from "firebase/firestore";
+
+const AbstracFligth = ({ navigation }) => {
   const dispatch = useDispatch();
   const stateApp = useSelector((state) => state.stateGlobal);
   //console.log("Estado Global Vuelos =>", stateApp);
@@ -17,6 +28,35 @@ const AbstracFligth = () => {
       dispatch(handleColor(false));
     }
   }, [stateApp.passengers]);
+
+  const user = auth;
+  // const docData = {
+  //   routeInitial: "AXM",
+  //   routeFinal: "BOG",
+  //   cityInitial: "Armenia",
+  //   cityFinal: "Bogotá",
+  //   date: "Diciembre 23, 2020",
+  //   passengers: 2,
+  //   email: user.currentUser.email
+  // };
+
+  const docData = {
+    routeInitial: stateApp.chooseCodeIntial,
+    routeFinal: stateApp.chooseCodeFinal,
+    cityInitial: stateApp.cityInitialChoos,
+    cityFinal: stateApp.cityFinalChoose,
+    date: stateApp.fechaViaje,
+    passengers: stateApp.passengers,
+    email: user.currentUser.email
+  };
+
+  async function addFlights() {
+    //console.log("PRESS ADDFLIGTH");
+    const response = await addDoc(collection(db, "flights"), docData);
+    console.log("==>", response);
+    navigation.navigatee("Fligths");
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ marginTop: "50%", width: "95%" }}>
@@ -36,7 +76,7 @@ const AbstracFligth = () => {
       <View style={styles.container}>
         <MyButton
           text={"Finish"}
-          onPress={() => alert("Finish")}
+          onPress={() => addFlights()}
           btnColor={stateApp.colorBtn}
         />
       </View>

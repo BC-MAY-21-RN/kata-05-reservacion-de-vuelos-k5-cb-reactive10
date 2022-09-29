@@ -40,7 +40,7 @@ const MyFlights = ({ navigation }) => {
     queryFlights.forEach((doc) => {
       flightData.push({ id: doc.id, data: doc.data() });
     });
-    console.log("Hola: ", flightData);
+    // console.log("Hola: ", flightData);
 
     setData(flightData);
     // data.map((listData) => setDataList(listData.data));
@@ -67,7 +67,7 @@ const MyFlights = ({ navigation }) => {
       outputRange: [1, 1, 1, 0]
     });
     return (
-      <ListFlights data={item} index={index} scale={scale} opacity={opacity} />
+      <ListFlights {...item} index={index} scale={scale} opacity={opacity} />
     );
   };
   const scrollY = useRef(new Animated.Value(0)).current;

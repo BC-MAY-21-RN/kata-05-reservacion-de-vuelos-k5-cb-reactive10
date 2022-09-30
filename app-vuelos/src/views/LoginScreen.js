@@ -23,6 +23,11 @@ import { LogBox } from "react-native";
 //firebase
 import { signInAcount } from "../firebase/auth-firebase";
 import Loader from "./Loader";
+import { auth } from "./../firebase/auth-firebase";
+import * as WebBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
+import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+import { CLIENT_ID } from "@env";
 
 const uri =
   "https://images.unsplash.com/photo-1527517928481-bcf8d6534de0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGF2aWFjaW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
@@ -106,6 +111,23 @@ const LoginScreen = () => {
     }
   }, [inputs.password]);
 
+  //Login Con Google
+
+  WebBrowser.maybeCompleteAuthSession();
+
+  // export default function GoogleSignInButton() {
+  const [request, response, promtAsync] = Google.useIdTokenAuthRequest({
+    clientId: CLIENT_ID ///Firebase
+  });
+
+  useEffect(() => {
+    if (response?.type === "success") {
+      const { id_token } = response.params;
+      const credential = GoogleAuthProvider.credential(id_token);
+      signInWithCredential(auth, credential);
+    }
+  }, [response]);
+
   return (
     <SafeAreaView style={stylesLogin.container}>
       <StatusBar style="light" />
@@ -153,7 +175,7 @@ const LoginScreen = () => {
                   <MyButton
                     text={"Sign Up with Google "}
                     name={"google"}
-                    onPress={() => console.log("handleCreateAccount")}
+                    onPress={() => promtAsync()}
                   />
                 </View>
 

@@ -7,6 +7,7 @@ import { swipeRightActions } from "../utils/helpers";
 import ComponentListFlight from "./ComponentListFlight";
 
 const ListFlights = ({ data, scale, opacity }) => {
+  
   return (
     <GestureHandlerRootView>
       <Swipeable renderRightActions={swipeRightActions}>

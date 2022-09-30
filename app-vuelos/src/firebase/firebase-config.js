@@ -19,4 +19,7 @@ export const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
+
+// export const app = getFirestore(firebaseConfig)
+
 export const database = getFirestore();

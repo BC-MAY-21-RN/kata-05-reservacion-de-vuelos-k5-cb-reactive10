@@ -6,7 +6,7 @@ import Title from "../components/Title";
 import ListFlights from "../components/ListFlights";
 import FloatingActionButton from "../components/FloatingActionButton";
 import { stylesMyFlights } from "./style/StyleMyFlights";
-
+import MyButton from "../components/MyButton";
 //firebase
 import {
   where,
@@ -17,7 +17,7 @@ import {
   deleteDoc,
   doc
 } from "firebase/firestore";
-import { db, auth } from "../firebase/auth-firebase";
+import { db, auth ,signOut} from "../firebase/auth-firebase";
 const user = auth;
 
 //constan animated
@@ -33,6 +33,7 @@ const MyFlights = ({ navigation }) => {
     const collectionRef = collection(db, "flights");
     const flights = query(
       collectionRef,
+      //----------------------------------------------//
       where("email", "==", `${user.currentUser.email}`)
     );
     const queryFlights = await getDocs(flights);
@@ -43,6 +44,7 @@ const MyFlights = ({ navigation }) => {
     setData(flightData);
   }
 
+  
   useEffect(() => {
     loadData();
   }, []);
@@ -76,10 +78,18 @@ const MyFlights = ({ navigation }) => {
       loadData();
     }, 1500);
   };
+  // const onSignOut = () => {
+  //   signOut(user).catch((err) => alert("Error SingOout"));
+  //   navigation.navigate("LoginScreen")
+  //   };
 
   return (
     <SafeAreaView style={stylesMyFlights.container}>
       <StatusBar style="dark" />
+        {/* <MyButton
+         text={"Logout"}
+         onPress={() => onSignOut()}
+       /> */}
       <Title titleContent={"My Flights"} />
       <Animated.FlatList
         data={data}

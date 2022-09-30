@@ -38,7 +38,6 @@ const MySelectLocation = ({ name }) => {
     setChooseData(cityInitial);
     dispatch(handleCityInitial(cityInitial));
   };
-  //console.log("DATAPICKER MYSELEC initial,=>", location1);
 
   //actualizar estado redux
   const setCode2 = (code) => {

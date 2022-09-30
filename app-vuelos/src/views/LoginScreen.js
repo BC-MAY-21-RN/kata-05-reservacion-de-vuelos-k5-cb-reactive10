@@ -26,8 +26,8 @@ import Loader from "./Loader";
 import { auth } from "./../firebase/auth-firebase";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
-import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
-import { CLIENT_ID } from "@env";
+import { GoogleAuthProvider, signInWithCredential,onAuthStateChanged } from "firebase/auth";
+import { CLIENT_ID, ANDROID_CLIENT_ID } from "@env";
 
 const uri =
   "https://images.unsplash.com/photo-1527517928481-bcf8d6534de0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGF2aWFjaW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
@@ -44,7 +44,6 @@ const LoginScreen = () => {
   const [showPassword, setshowPassword] = useState(false);
   const [loginState, setLoginState] = useState(false);
   const [loading, setLoading] = React.useState(false);
-  console.log("resultado de login", loginState);
 
   useEffect(() => {
     if (loginState) {
@@ -117,16 +116,42 @@ const LoginScreen = () => {
 
   // export default function GoogleSignInButton() {
   const [request, response, promtAsync] = Google.useIdTokenAuthRequest({
-    clientId: CLIENT_ID ///Firebase
+    clientId: CLIENT_ID ,///Firebase
+    androidClientId: ANDROID_CLIENT_ID
+
   });
+
 
   useEffect(() => {
     if (response?.type === "success") {
       const { id_token } = response.params;
       const credential = GoogleAuthProvider.credential(id_token);
       signInWithCredential(auth, credential);
+      // setLoginState(true)
     }
   }, [response]);
+
+
+  useEffect(() => {
+    const unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
+    if (user) {
+    const userToSave = {
+    email: user.email
+    };
+    } else {
+    alert("user is not authenticated");
+    }
+    if (user.email) {
+    setLoginState(true);
+    }
+    return {
+    email_user: user.email
+    };
+  
+});
+return unsubscribeAuth;
+}, []);
+
 
   return (
     <SafeAreaView style={stylesLogin.container}>
@@ -175,6 +200,7 @@ const LoginScreen = () => {
                   <MyButton
                     text={"Sign Up with Google "}
                     name={"google"}
+                    disable={!request}
                     onPress={() => promtAsync()}
                   />
                 </View>

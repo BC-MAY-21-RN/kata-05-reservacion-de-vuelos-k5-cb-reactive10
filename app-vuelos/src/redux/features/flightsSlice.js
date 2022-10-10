@@ -7,7 +7,8 @@ const initialState = {
   cityFinalChoose: "",
   fechaViaje: "",
   passengers: "",
-  colorBtn: false
+  colorBtn: false,
+  loginState:false
 };
 
 export const flightsSlice = createSlice({
@@ -34,6 +35,9 @@ export const flightsSlice = createSlice({
     },
     handleColor: (state, action) => {
       state.colorBtn = action.payload;
+    },
+    handleStateLogin:(state,action)=>{
+      state.loginState= action.payload;
     }
   }
 });
@@ -45,7 +49,8 @@ export const {
   handleCityFinal,
   handlFechaViaje,
   handlePassengers,
-  handleColor
+  handleColor,
+  handleStateLogin
 } = flightsSlice.actions;
 
 export default flightsSlice.reducer;

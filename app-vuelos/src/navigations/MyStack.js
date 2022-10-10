@@ -10,6 +10,7 @@ import BookingScreenDestinity from "../views/BookingScreenDestinity";
 import CalendarScreen from "../views/CalendarsScreen";
 import Passenger from "./../views/Passenger";
 import AbstracFligth from "../views/AbstracFligth";
+// import HomePrueba from "../views/HomePrueba";
 
 //configStack
 import { myConfigHeader } from "../utils/helpers";
@@ -31,6 +32,7 @@ const MyStack = () => {
       <Stack.Screen name="Calendars" component={CalendarScreen} />
       <Stack.Screen name="Passenger" component={Passenger} />
       <Stack.Screen name="AbstracFligth" component={AbstracFligth} />
+      {/* <Stack.Screen name="HomePrueba" component={HomePrueba} /> */}
     </Stack.Navigator>
   );
 };

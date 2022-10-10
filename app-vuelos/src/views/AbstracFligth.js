@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 import React, { useEffect } from "react";
 import ComponentListFlight from "./../components/ComponentListFlight";
 import TextBooking from "./../components/TextBooking";
@@ -6,10 +6,13 @@ import MyButton from "./../components/MyButton";
 import { useSelector, useDispatch } from "react-redux";
 import { handleColor } from "../redux/features/flightsSlice";
 
-const AbstracFligth = () => {
+//firebase
+import { db, auth } from "../firebase/auth-firebase";
+import { collection, addDoc } from "firebase/firestore";
+
+const AbstracFligth = ({ navigation }) => {
   const dispatch = useDispatch();
   const stateApp = useSelector((state) => state.stateGlobal);
-
   useEffect(() => {
     if (stateApp.passengers !== "" && stateApp.chooseCodeIntial !== "") {
       dispatch(handleColor(true));
@@ -17,6 +20,24 @@ const AbstracFligth = () => {
       dispatch(handleColor(false));
     }
   }, [stateApp.passengers]);
+
+  const user = auth;
+
+  const docData = {
+    routeInitial: stateApp.chooseCodeIntial,
+    routeFinal: stateApp.chooseCodeFinal,
+    cityInitial: stateApp.cityInitialChoose,
+    cityFinal: stateApp.cityFinalChoose,
+    date: stateApp.fechaViaje,
+    passengers: stateApp.passengers,
+    email: user.currentUser.email,
+    createdAt: new Date()
+  };
+  async function addFlights() {
+    const response = await addDoc(collection(db, "flights"), docData);
+    navigation.navigate("Fligths");
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ marginTop: "50%", width: "95%" }}>
@@ -36,7 +57,7 @@ const AbstracFligth = () => {
       <View style={styles.container}>
         <MyButton
           text={"Finish"}
-          onPress={() => alert("Finish")}
+          onPress={() => addFlights()}
           btnColor={stateApp.colorBtn}
         />
       </View>

@@ -14,7 +14,7 @@ const ComponentListFlight = ({
   condition
 }) => {
   return (
-    <View style={{ marginLeft: 10 }}>
+    <View>
       <View style={stylesListFlights.citysCode}>
         <Text style={stylesListFlights.routes}>{routeInitial}</Text>
         <MaterialIcons

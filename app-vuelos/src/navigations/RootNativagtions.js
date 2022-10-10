@@ -7,6 +7,7 @@ import { store } from "../redux/store/store";
 
 const RootNativagtions = () => {
   return (
+    
     <Provider store={store}>
       <NavigationContainer>
         <MyStack />

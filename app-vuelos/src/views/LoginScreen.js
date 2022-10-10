@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import {
   Image,
   Text,
@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   TextInput,
   SafeAreaView,
-  Keyboard
+  Keyboard,
+  ActivityIndicator
 } from "react-native";
 import { BlurView } from "expo-blur";
 import LottieView from "lottie-react-native";
@@ -18,19 +19,39 @@ import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import { stylesLogin } from "../views/style/StyleLogin";
 import { useNavigation } from "@react-navigation/native";
+import { LogBox } from "react-native";
+//firebase
+import { signInAcount } from "../firebase/auth-firebase";
+import Loader from "./Loader";
+import { auth } from "./../firebase/auth-firebase";
+import * as WebBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
+import { GoogleAuthProvider, signInWithCredential,onAuthStateChanged } from "firebase/auth";
+import { CLIENT_ID, ANDROID_CLIENT_ID } from "@env";
 
 const uri =
   "https://images.unsplash.com/photo-1527517928481-bcf8d6534de0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGF2aWFjaW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
-
+LogBox.ignoreLogs(["AsyncStorage"]);
 const LoginScreen = () => {
   const navigation = useNavigation();
   const [inputs, setInputs] = useState({
     email: "",
     password: ""
   });
+
   const [btnColor, setBtnColor] = useState(false);
   const [errors, setErrors] = useState({});
   const [showPassword, setshowPassword] = useState(false);
+  const [loginState, setLoginState] = useState(false);
+  const [loading, setLoading] = React.useState(false);
+
+  useEffect(() => {
+    if (loginState) {
+      {
+        navigation.navigate("Fligths");
+      }
+    }
+  }, [loginState]);
 
   const validate = () => {
     Keyboard.dismiss();
@@ -61,8 +82,16 @@ const LoginScreen = () => {
 
     if (isValid) {
       // register();
-      console.log(alert("user Loggin"));
+      login();
     }
+  };
+
+  const login = () => {
+    setLoading(true);
+    setTimeout(async () => {
+      signInAcount(inputs.email, inputs.password, setLoginState);
+      setLoading(false);
+    }, 500);
   };
 
   //functions
@@ -80,6 +109,49 @@ const LoginScreen = () => {
       setBtnColor(false);
     }
   }, [inputs.password]);
+
+  //Login Con Google
+
+  WebBrowser.maybeCompleteAuthSession();
+
+  // export default function GoogleSignInButton() {
+  const [request, response, promtAsync] = Google.useIdTokenAuthRequest({
+    clientId: CLIENT_ID ,///Firebase
+    androidClientId: ANDROID_CLIENT_ID
+
+  });
+
+
+  useEffect(() => {
+    if (response?.type === "success") {
+      const { id_token } = response.params;
+      const credential = GoogleAuthProvider.credential(id_token);
+      signInWithCredential(auth, credential);
+      // setLoginState(true)
+    }
+  }, [response]);
+
+
+  useEffect(() => {
+    const unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
+    if (user) {
+    const userToSave = {
+    email: user.email
+    };
+    } else {
+    alert("user is not authenticated");
+    }
+    if (user.email) {
+    setLoginState(true);
+    }
+    return {
+    email_user: user.email
+    };
+  
+});
+return unsubscribeAuth;
+}, []);
+
 
   return (
     <SafeAreaView style={stylesLogin.container}>
@@ -128,7 +200,8 @@ const LoginScreen = () => {
                   <MyButton
                     text={"Sign Up with Google "}
                     name={"google"}
-                    onPress={() => console.log("handleCreateAccount")}
+                    disable={!request}
+                    onPress={() => promtAsync()}
                   />
                 </View>
 
@@ -137,13 +210,6 @@ const LoginScreen = () => {
                   style={stylesLogin.textStyles}
                 >
                   Register
-                </Text>
-
-                <Text
-                  onPress={() => navigation.navigate("Fligths")}
-                  style={stylesLogin.textStyles}
-                >
-                  MyFlights
                 </Text>
               </View>
             </View>

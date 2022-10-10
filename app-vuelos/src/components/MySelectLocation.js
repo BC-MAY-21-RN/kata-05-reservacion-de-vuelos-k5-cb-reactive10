@@ -11,8 +11,8 @@ import {
 } from "../redux/features/flightsSlice";
 
 const MySelectLocation = ({ name }) => {
-  const location2 = useSelector((state) => state.stateGlobal.cityFinalChoose);
-  const code2 = useSelector((state) => state.stateGlobal.chooseCodeFinal);
+  const location1 = useSelector((state) => state.stateGlobal.cityInitialChoose);
+  // const code2 = useSelector((state) => state.stateGlobal.chooseCodeFinal);
   //REDUX Dispatch
   const dispatch = useDispatch();
 

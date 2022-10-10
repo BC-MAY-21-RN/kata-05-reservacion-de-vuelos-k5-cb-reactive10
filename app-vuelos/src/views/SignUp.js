@@ -14,6 +14,9 @@ import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import Title from "../components/Title";
 
+// firebase
+import { handleCreateAcount } from "../firebase/auth-firebase";
+
 const SignUp = () => {
   const navigation = useNavigation();
   //useStates
@@ -42,8 +45,7 @@ const SignUp = () => {
 
     if (!inputs.name) {
       handleError("*Please input fullname", "name");
-      isValid = false;
-    }
+      isValid = true};
 
     if (!inputs.password) {
       handleError("*Please input password", "password");
@@ -67,13 +69,16 @@ const SignUp = () => {
     if (isValid) {
       register();
     }
-  };
+  }
 
   const register = () => {
     setLoading(true);
     setTimeout(() => {
       try {
         setLoading(false);
+        //navigation.navigate('LoginScreen');
+        handleCreateAcount(inputs.email, inputs.password, inputs.name);
+        alert("GOOOO GOOOOOO!!!!");
         alert("GOOO");
       } catch (error) {
         alert("Error", "Something went wrong");
@@ -97,7 +102,7 @@ const SignUp = () => {
         <MyInput
           label={"Firts Name"}
           keyboardType="default"
-          onChangeText={(text) => handleOnchange(text)}
+          onChangeText={(text) => handleOnchange(text, "name")}
           error={errors.name}
           onFocus={() => handleError(null, "name")}
         />
@@ -188,7 +193,7 @@ const SignUp = () => {
         </Text>
       </KeyboardAwareScrollView>
     </SafeAreaView>
-  );
-};
+  )
+  }
 
 export default SignUp;
